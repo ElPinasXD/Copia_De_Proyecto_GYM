@@ -1,0 +1,119 @@
+.mainWrapperUnique {
+  background-color: #f9f9f9;
+  color: #333;
+  padding-bottom: 2rem;
+}
+
+.headerNimbusUnique {
+  padding: 2rem;
+}
+
+.headerMainTitleUnique {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.filterAreaUnique {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.filterPromptUnique {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.filterDropdownsUnique {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.filterDropdownUnique {
+  height: 2.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filterDropdownUnique:focus {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
+}
+
+.itemShowcaseUnique {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.0rem;
+  padding: 0 1rem;
+  max-width: 1500px; 
+  margin: 0 auto;
+}
+
+.itemCardUnique {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.itemImageUnique {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  aspect-ratio: 3 / 2;
+}
+
+.itemDetailsUnique {
+  padding: 1rem;
+}
+
+.itemTitleUnique {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.itemDescriptionUnique {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #a0aec0;
+}
+
+.itemActionsUnique {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemPriceUnique {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.purchaseButtonUnique {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #3182ce;
+  color: #ffffff;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.purchaseButtonUnique:hover {
+  background-color: #2b6cb0;
+}
