@@ -1,7 +1,7 @@
-/* Form.css */
+/* Login.css */
 
 /* Estilos para el contenedor del formulario */
-.form-container {
+.login-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,14 +11,14 @@
     padding: 20px;
   }
   
-  .form-title {
+  .login-title {
     font-size: 2rem;
     margin-bottom: 10px; /* Ajustar el margen para reducir el espacio */
     color: #333; /* Texto negro oscuro */
     font-family: 'Arial', sans-serif;
   }
   
-  .form {
+  .login-form {
     background-color: #fff; /* Fondo blanco del formulario */
     border: 1px solid #ddd; /* Borde gris claro para el formulario */
     border-radius: 8px; /* Bordes redondeados */
@@ -29,7 +29,7 @@
     box-sizing: border-box; /* Incluir padding y border en el ancho total */
   }
   
-  .form-input {
+  .login-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -40,11 +40,11 @@
     box-sizing: border-box; /* Incluir padding y border en el ancho total */
   }
   
-  .form-input::placeholder {
+  .login-input::placeholder {
     color: #888; /* Texto del placeholder en gris claro */
   }
   
-  .form-submit {
+  .login-submit {
     width: 100%;
     padding: 10px;
     border: none;
@@ -56,7 +56,7 @@
     transition: background-color 0.3s ease;
   }
   
-  .form-submit:hover {
+  .login-submit:hover {
     background-color: #555; /* Fondo gris oscuro en hover */
   }
   
