@@ -9,6 +9,10 @@ function Form() {
     navigate('/login'); // Asegúrate de que la ruta sea correcta y esté definida en App.js
   };
 
+  const handleSubmitIndex = () => {
+    navigate('/'); // Asegúrate de que la ruta sea correcta y esté definida en App.js
+  };
+
   return (
     <div className="form-container">
       <h1 className="form-title">Formulario</h1>
@@ -55,7 +59,7 @@ function Form() {
           required
           className="form-input"
         />
-        <button onClick={handleLoginComprador}
+        <button onClick={handleSubmitIndex}
           type="submit"
           className="form-submit"
         >

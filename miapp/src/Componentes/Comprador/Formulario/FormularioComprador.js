@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './FormularioComprador.css';
 import MensajeComprado from './MensajeComprado';
+import { useNavigate } from 'react-router-dom';
 
 const FormularioComprador = () => {
   const [name, setName] = useState('');
@@ -8,13 +9,15 @@ const FormularioComprador = () => {
   const [quantity, setQuantity] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [presentation, setPresentation] = useState('');
-  const [isPurchased, setIsPurchased] = useState(false); // Estado para controlar la confirmación
+  const [isPurchased, setIsPurchased] = useState(false);
+
+  const navigate = useNavigate(); // Usar useNavigate aquí
 
   const increment = () => setQuantity(prevQuantity => prevQuantity + 1);
   const decrement = () => setQuantity(prevQuantity => Math.max(prevQuantity - 1, 0));
 
   const handleVolverIndex = () => {
-    setIsPurchased(false); // Restablecer al estado inicial si se vuelve al índice
+    navigate('/'); // Llamar a la función de navegación
   }
 
   const handleSubmit = (event) => {

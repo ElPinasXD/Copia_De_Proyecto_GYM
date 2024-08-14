@@ -12,7 +12,7 @@ import MensajeComprado from "./Componentes/Comprador/Formulario/MensajeComprado"
 // Componente que decide si renderizar el Header y el Footer
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideHeaderFooter = ['/login', '/registro'].includes(location.pathname);
+  const hideHeaderFooter = ['/login', '/registro', '/formulario'].includes(location.pathname);
 
   return (
     <>
