@@ -1,15 +1,15 @@
 import React from "react";
 import "./Header.css"; // Importa el archivo de estilos
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
-import Logo from '../../assets/images/LogoTemporal.jpg';
+import Logo from "../../assets/images/LogoTemporal.png";
 
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isIndexVendedor = location.pathname === '/IndexVendedor';
-  const isHomePage = location.pathname === '/'; // Verifica si estamos en la página principal
+  const isIndexVendedor = location.pathname === "/IndexVendedor";
+  const isHomePage = location.pathname === "/"; // Verifica si estamos en la página principal
 
   const handleButtonClick = (path) => {
     navigate(path);
@@ -23,14 +23,14 @@ function Header() {
       <div className="header-buttons-container">
         {isHomePage && (
           <>
-            <button 
-              onClick={() => handleButtonClick('/registro')} 
+            <button
+              onClick={() => handleButtonClick("/registro")}
               className="header-buttonUnique"
             >
               Registrarse
             </button>
-            <button 
-              onClick={() => handleButtonClick('/login')} 
+            <button
+              onClick={() => handleButtonClick("/login")}
               className="header-buttonUnique"
             >
               Iniciar Sesión
@@ -38,11 +38,13 @@ function Header() {
           </>
         )}
         {!isHomePage && (
-          <button 
-            onClick={() => handleButtonClick(isIndexVendedor ? '/' : '/registro')} 
+          <button
+            onClick={() =>
+              handleButtonClick(isIndexVendedor ? "/" : "/registro")
+            }
             className="header-buttonUnique"
           >
-            {isIndexVendedor ? 'Cerrar Sesión' : 'Registrarse'}
+            {isIndexVendedor ? "Cerrar Sesión" : "Registrarse"}
           </button>
         )}
       </div>
