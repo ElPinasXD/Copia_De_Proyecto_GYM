@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Formulario.css"; // Asegúrate de tener el CSS adecuado
+import "./Formulario.css";
 
 const FormularioPago = ({ onClose }) => {
   const [name, setName] = useState("");
@@ -8,16 +8,34 @@ const FormularioPago = ({ onClose }) => {
   const [expiryYear, setExpiryYear] = useState("");
   const [cvv, setCvv] = useState("");
 
-  const handlePayment = () => {
-    // Aquí puedes agregar la lógica de pago
-    console.log("Datos de pago:", {
-      name,
-      cardNumber,
-      expiryMonth,
-      expiryYear,
-      cvv,
-    });
-    onClose(); // Cierra el formulario de pago
+  const handlePayment = (event) => {
+    event.preventDefault();
+
+    // Validación de campos
+    if (!name.trim() || cardNumber.length !== 16 || !expiryMonth || !expiryYear || !cvv) {
+      alert("Por favor, complete todos los campos correctamente.");
+      return;
+    }
+
+    // Validación adicional para mes y año de expiración
+    const currentYear = new Date().getFullYear() % 100;
+    const currentMonth = new Date().getMonth() + 1;
+    const expMonth = parseInt(expiryMonth, 10);
+    const expYear = parseInt(expiryYear, 10);
+
+    if (expMonth < 1 || expMonth > 12) {
+      alert("Mes de expiración inválido.");
+      return;
+    }
+
+    if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
+      alert("La tarjeta ha expirado.");
+      return;
+    }
+
+    // Si todas las validaciones pasan, procesa el pago
+    console.log("Datos de pago:", { name, cardNumber, expiryMonth, expiryYear, cvv });
+    onClose();
   };
 
   return (
@@ -26,7 +44,7 @@ const FormularioPago = ({ onClose }) => {
         <h3 className="payment-form__title">Pagar con tarjeta</h3>
         <p className="payment-form__description">Ingresa tus datos de pago</p>
       </div>
-      <div className="payment-form__form">
+      <form onSubmit={handlePayment} className="payment-form__form">
         <div className="payment-form__input-group">
           <label className="payment-form__label" htmlFor="name">
             Nombre y apellidos
@@ -50,23 +68,37 @@ const FormularioPago = ({ onClose }) => {
             placeholder="0000 0000 0000 0000"
             type="text"
             value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value.replace(/\D/g, '');
+              if (value.length <= 16) {
+                setCardNumber(value);
+              }
+            }}
             required
+            maxLength="16"
+            pattern="\d{16}"
           />
         </div>
         <div className="payment-form__date-group">
           <div className="payment-form__input-group">
             <label className="payment-form__label" htmlFor="expiry-month">
-              Vencimiento
+              Mes
             </label>
             <input
               className="payment-form__input"
               id="expiry-month"
-              placeholder="Mes"
+              placeholder="MM"
               type="text"
               value={expiryMonth}
-              onChange={(e) => setExpiryMonth(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 2) {
+                  setExpiryMonth(value);
+                }
+              }}
               required
+              maxLength="2"
+              pattern="\d{2}"
             />
           </div>
           <div className="payment-form__input-group">
@@ -76,10 +108,18 @@ const FormularioPago = ({ onClose }) => {
             <input
               className="payment-form__input"
               id="expiry-year"
-              placeholder="Año"
+              placeholder="AA"
               type="text"
               value={expiryYear}
-              onChange={(e) => setExpiryYear(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 2) {
+                  setExpiryYear(value);
+                }
+              }}
+              required
+              maxLength="2"
+              pattern="\d{2}"
             />
           </div>
           <div className="payment-form__input-group">
@@ -92,16 +132,24 @@ const FormularioPago = ({ onClose }) => {
               placeholder="CVV"
               type="text"
               value={cvv}
-              onChange={(e) => setCvv(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 3) {
+                  setCvv(value);
+                }
+              }}
+              required
+              maxLength="3"
+              pattern="\d{3}"
             />
           </div>
         </div>
-      </div>
-      <div className="payment-form__footer">
-        <button className="payment-form__pay-button" onClick={handlePayment}>
-          Pagar
-        </button>
-      </div>
+        <div className="payment-form__footer">
+          <button type="submit" className="payment-form__pay-button">
+            Pagar
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

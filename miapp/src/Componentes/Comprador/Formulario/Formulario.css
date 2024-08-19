@@ -7,8 +7,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Altura completa de la ventana */
-  padding: 1rem; /* Espacio alrededor del formulario */
+  height: 100vh;
+  /* Altura completa de la ventana */
+  padding: 1rem;
+  /* Espacio alrededor del formulario */
   box-sizing: border-box;
 }
 
@@ -22,8 +24,10 @@ body {
   width: 100%;
   max-width: 28rem;
   padding: 1.5rem;
-  box-sizing: border-box; /* Incluir padding y border en el ancho total */
-  overflow-y: auto; /* Permite scroll vertical si el contenido excede la altura del contenedor */
+  box-sizing: border-box;
+  /* Incluir padding y border en el ancho total */
+  overflow-y: auto;
+  /* Permite scroll vertical si el contenido excede la altura del contenedor */
 }
 
 /* Estilos para el encabezado dentro del formulario */
@@ -56,7 +60,8 @@ body {
 
 .form-input,
 .form-price-input {
-  width: calc(100% - 2rem); /* Espacio a los lados */
+  width: calc(100% - 2rem);
+  /* Espacio a los lados */
   height: 2.5rem;
   border-radius: 0.5rem;
   border: 1px solid #dcdcdc;
@@ -93,15 +98,20 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .quantity-controls .quantity-btn {
-  width: 2rem; /* Tamaño de los botones + y - */
-  height: 2rem; /* Mismo alto que el input */
+  width: 2rem;
+  /* Tamaño de los botones + y - */
+  height: 2rem;
+  /* Mismo alto que el input */
   font-size: 1rem;
-  line-height: 1; /* Asegurar que el contenido del botón esté centrado verticalmente */
+  line-height: 1;
+  /* Asegurar que el contenido del botón esté centrado verticalmente */
 }
 
 .quantity-input {
-  width: 3rem; /* Ancho ajustado del input de cantidad */
-  height: 2rem; /* Mismo alto que los botones */
+  width: 3rem;
+  /* Ancho ajustado del input de cantidad */
+  height: 2rem;
+  /* Mismo alto que los botones */
   text-align: center;
   border-radius: 0.5rem;
   background-color: #ffffff;
@@ -112,7 +122,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .payment-container,
 .presentation-container {
   display: flex;
-  flex-direction: row; /* Botones en una sola fila */
+  flex-direction: row;
+  /* Botones en una sola fila */
   gap: 0.5rem;
   padding: 0 1rem;
   width: 100%;
@@ -146,14 +157,16 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .payment-container #cash::before {
-  content: "$"; /* Signo de dólar */
+  content: "$";
+  /* Signo de dólar */
   font-size: 1.5rem;
   margin-right: 0.5rem;
 }
 
 /* Eliminar iconos en "Presentación" */
 .presentation-container span {
-  display: inline; /* Mostrar solo el texto */
+  display: inline;
+  /* Mostrar solo el texto */
   margin-right: 0;
 }
 
@@ -161,7 +174,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .form-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Ajustar espacio entre los botones */
+  gap: 1rem;
+  /* Ajustar espacio entre los botones */
   margin-top: 30px;
 }
 
@@ -179,15 +193,18 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .form-buttons button:hover {
-  transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+  transform: scale(1.05);
+  /* Efecto de aumento al pasar el mouse */
 }
 
 .btn-regresar {
-  background-color: #e74c3c; /* Rojo */
+  background-color: #e74c3c;
+  /* Rojo */
 }
 
 .btn-siguiente {
-  background-color: #27ae60; /* Verde */
+  background-color: #27ae60;
+  /* Verde */
 }
 
 .btn-comprar {
@@ -197,37 +214,48 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Estilos responsivos */
 @media (max-width: 768px) {
   .form-card {
-    max-width: 90%; /* Ajusta el ancho máximo del formulario en pantallas pequeñas */
-    margin: 1rem auto; /* Ajusta los márgenes para móviles */
-    padding: 1rem; /* Reduce el padding para móviles */
+    max-width: 90%;
+    /* Ajusta el ancho máximo del formulario en pantallas pequeñas */
+    margin: 1rem auto;
+    /* Ajusta los márgenes para móviles */
+    padding: 1rem;
+    /* Reduce el padding para móviles */
   }
 
   .form-title {
-    font-size: 1.5rem; /* Reduce el tamaño del título en pantallas pequeñas */
+    font-size: 1.5rem;
+    /* Reduce el tamaño del título en pantallas pequeñas */
   }
 
   .form-input,
   .form-price-input {
-    font-size: 0.75rem; /* Reduce el tamaño de fuente en pantallas pequeñas */
+    font-size: 0.75rem;
+    /* Reduce el tamaño de fuente en pantallas pequeñas */
   }
 
   .quantity-container {
-    flex-direction: column; /* Coloca los botones y el input de cantidad en columna en pantallas pequeñas */
-    align-items: stretch; /* Alinea los elementos a lo ancho del contenedor */
+    flex-direction: column;
+    /* Coloca los botones y el input de cantidad en columna en pantallas pequeñas */
+    align-items: stretch;
+    /* Alinea los elementos a lo ancho del contenedor */
   }
 
   .quantity-controls .quantity-btn {
-    width: 1.5rem; /* Reduce el tamaño de los botones */
+    width: 1.5rem;
+    /* Reduce el tamaño de los botones */
     height: 1.5rem;
   }
 
   .quantity-input {
-    width: 2.5rem; /* Reduce el ancho del input de cantidad */
+    width: 2.5rem;
+    /* Reduce el ancho del input de cantidad */
   }
 
   .form-buttons {
-    flex-direction: column; /* Coloca los botones en columna en pantallas pequeñas */
-    gap: 1rem; /* Ajusta el espacio entre los botones */
+    flex-direction: column;
+    /* Coloca los botones en columna en pantallas pequeñas */
+    gap: 1rem;
+    /* Ajusta el espacio entre los botones */
   }
 }
 
@@ -264,12 +292,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .payment-form__card {
   border-radius: 0.5rem;
-  border: 1px solid #1e40af;
+  border: 1px solid #3182ce;
   background-color: #ffffff;
-  color: #1e3a8a;
+  color: #3182ce;
   margin-bottom: 28px;
-  padding: 1.5rem; /* Agrega padding para separar el contenido del borde */
-  overflow: hidden; /* Evita que el contenido se desborde fuera del contenedor */
+  padding: 1.5rem;
+  /* Agrega padding para separar el contenido del borde */
+  overflow: hidden;
+  /* Evita que el contenido se desborde fuera del contenedor */
 }
 
 .payment-form__header {
@@ -287,7 +317,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .payment-form__description {
   font-size: 0.875rem;
-  color: #6b7280; /* color muted-foreground */
+  color: #6b7280;
+  /* color muted-foreground */
 }
 
 .payment-form__form {
@@ -310,32 +341,41 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .payment-form__input {
-  height: 2.5rem; /* Altura uniforme para todos los inputs */
+  height: 2.5rem;
+  /* Altura uniforme para todos los inputs */
   border-radius: 0.5rem;
-  border: 1px solid #1e40af;
+  border: 1px solid #3182ce;
   background-color: #ffffff;
   padding: 0 0.75rem;
   font-size: 0.875rem;
-  color: #1e3a8a;
-  width: 100%; /* Asegurar que el input ocupe el 100% del espacio disponible en su grupo */
-  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho y alto total */
+  color: #3182ce;
+  width: 100%;
+  /* Asegurar que el input ocupe el 100% del espacio disponible en su grupo */
+  box-sizing: border-box;
+  /* Incluye padding y border en el cálculo del ancho y alto total */
 }
 
 /* Ajusta el espacio y alineación de los campos de fecha */
 .payment-form__date-group {
-  display: flex; /* Cambiar de grid a flex para mejor ajuste */
-  gap: 1rem; /* Espacio entre los inputs */
-  width: 100%; /* Ocupa el ancho total disponible */
+  display: flex;
+  /* Cambiar de grid a flex para mejor ajuste */
+  gap: 1rem;
+  /* Espacio entre los inputs */
+  width: 100%;
+  /* Ocupa el ancho total disponible */
 }
 
 .payment-form__date-group .payment-form__input-group {
-  flex: 1; /* Permitir que cada input de fecha ocupe el espacio disponible en la fila */
+  flex: 1;
+  /* Permitir que cada input de fecha ocupe el espacio disponible en la fila */
 }
 
 /* Asegura que los inputs dentro de .payment-form__date-group se alineen y tengan la misma altura */
 .payment-form__date-group input {
-  height: 2.5rem; /* Altura uniforme para los inputs dentro de .payment-form__date-group */
-  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho y alto total */
+  height: 2.5rem;
+  /* Altura uniforme para los inputs dentro de .payment-form__date-group */
+  box-sizing: border-box;
+  /* Incluye padding y border en el cálculo del ancho y alto total */
 }
 
 /* Mantiene el botón de pago en su lugar */
@@ -354,7 +394,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 0.875rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  background-color: #1e40af;
+  background-color: #3182ce;
   width: 100%;
   height: 2.2rem;
   color: #f9fafb;

@@ -3,8 +3,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #ffffff; /* Color de fondo del header */
-  border-bottom: 1px solid #e2e8f0; /* Línea inferior */
+  background-color: #ffffff;
+  /* Color de fondo del header */
+  border-bottom: 1px solid #e2e8f0;
+  /* Línea inferior */
 }
 
 .logoUnique {
@@ -12,7 +14,7 @@
 }
 
 .logo-imageUnique {
-  height: 60px; /* Ajusta el tamaño del logo */
+  height: 60px;
   width: auto;
 }
 
@@ -24,10 +26,14 @@
 }
 
 .header-buttonUnique {
-  background-color: transparent; /* Fondo transparente */
-  color: #3182ce; /* Color del texto del botón */
-  border: 2px solid #3182ce; /* Borde visible con el color del texto */
-  border-radius: 0.375rem; /* Bordes redondeados */
+  background-color: transparent;
+  /* Fondo transparente */
+  color: #3182ce;
+  /* Color del texto del botón */
+  border: 2px solid #3182ce;
+  /* Borde visible con el color del texto */
+  border-radius: 0.375rem;
+  /* Bordes redondeados */
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
@@ -39,8 +45,34 @@
 }
 
 .header-buttonUnique:hover {
-  background-color: #3182ce; /* Fondo gris claro en hover */
-  color: #ffffff; /* Color del texto del botón */
+  background-color: #3182ce;
+  /* Fondo gris claro en hover */
+  color: #ffffff;
+  /* Color del texto del botón */
+}
+
+.header-buttonUniqueLog {
+  background-color: transparent;
+  /* Fondo transparente */
+  color: #ce3131;
+  /* Color del texto del botón */
+  border: 2px solid #ce3131;
+  /* Borde visible con el color del texto */
+  border-radius: 0.375rem;
+  /* Bordes redondeados */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.header-buttonUniqueLog:hover {
+  background-color: #ce3131;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -49,11 +81,13 @@
   }
 
   .logo-imageUnique {
-    height: 30px; /* Ajusta el tamaño del logo en pantallas pequeñas */
+    height: 30px;
+    /* Ajusta el tamaño del logo en pantallas pequeñas */
   }
 
   .register-buttonUnique {
-    font-size: 0.875rem; /* Ajusta el tamaño de la fuente en pantallas pequeñas */
+    font-size: 0.875rem;
+    /* Ajusta el tamaño de la fuente en pantallas pequeñas */
     padding: 0.5rem;
   }
 }

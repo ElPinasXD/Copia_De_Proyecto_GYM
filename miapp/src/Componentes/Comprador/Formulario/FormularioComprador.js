@@ -1,25 +1,38 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Formulario.css";
 import FormularioPago from "./FormularioPago";
 import MensajeComprado from "./MensajeComprado";
 
 const FormularioComprador = () => {
+  const location = useLocation();
+  const selectedProduct = location.state?.product;
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [presentation, setPresentation] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1); // Paso actual del formulario
-  const [productPrice, setProductPrice] = useState(0); // Precio del producto
-  const [showPaymentForm, setShowPaymentForm] = useState(false); // Mostrar formulario de pago
+  const [currentStep, setCurrentStep] = useState(1);
+  const [productPrice, setProductPrice] = useState(0);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
 
   const navigate = useNavigate();
 
+  /*Calcular el precio del producto*/
+  useEffect(() => {
+    if (selectedProduct) {
+      const price = parseFloat(selectedProduct.price.replace('$', ''));
+      setProductPrice(price * quantity);
+    }
+  }, [selectedProduct, quantity]);
+
   const increment = () => setQuantity((prevQuantity) => prevQuantity + 1);
   const decrement = () =>
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0));
+    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+
+
 
   const handleVolverIndex = () => {
     navigate("/");
@@ -27,32 +40,30 @@ const FormularioComprador = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!name || !address || quantity <= 0 || !paymentMethod || !presentation) {
+    if (!paymentMethod || !presentation) {
       alert("Por favor, complete todos los campos.");
       return;
     }
-
-    console.log("Formulario enviado", {
-      name,
-      address,
-      quantity,
-      paymentMethod,
-      presentation,
-    });
-
     setIsPurchased(true);
   };
 
   const handleNextStep = () => {
+    if (currentStep === 1) {
+      if (!name.trim() || !address.trim()) {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
+    } else if (currentStep === 2) {
+      if (quantity <= 0) {
+        alert("Por favor, seleccione una cantidad válida.");
+        return;
+      }
+    }
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const handlePrevStep = () => {
     setCurrentStep((prevStep) => prevStep - 1);
-  };
-
-  const calculatePrice = (quantity, price) => {
-    setProductPrice(quantity * price);
   };
 
   const handlePaymentClose = () => {
@@ -70,7 +81,7 @@ const FormularioComprador = () => {
               <div className="form-header">
                 <h3 className="form-title">Información de la compra</h3>
               </div>
-              <form onSubmit={handleSubmit} className="form-body">
+              <form className="form-body">
                 <div className="form-field">
                   <label htmlFor="name">Nombre</label>
                   <input
@@ -120,8 +131,17 @@ const FormularioComprador = () => {
                 <h3 className="form-title">Información de la compra</h3>
               </div>
               <div className="form-body">
+                <div className="form-field">
+                  <label htmlFor="product">Producto</label>
+                  <input
+                    type="text"
+                    id="product"
+                    className="form-input"
+                    value={selectedProduct?.name || ''}
+                    readOnly
+                  />
+                </div>
                 <div className="quantity-container">
-                  {" "}
                   Cantidad
                   <button className="quantity-btn" onClick={decrement}>
                     -
@@ -137,12 +157,12 @@ const FormularioComprador = () => {
                   </button>
                 </div>
                 <div className="form-field">
-                  <label htmlFor="price">Precio</label>
+                  <label htmlFor="price">Precio Total</label>
                   <input
                     type="text"
                     id="price"
                     className="form-input"
-                    value={`$${productPrice}`}
+                    value={`$${productPrice.toFixed(2)}`}
                     readOnly
                   />
                 </div>
@@ -201,15 +221,17 @@ const FormularioComprador = () => {
                 )}
                 <div className="form-field">
                   <label htmlFor="presentation">Presentación</label>
-                  <input
-                    type="text"
+                  <select
                     id="presentation"
                     className="form-input"
                     value={presentation}
                     onChange={(e) => setPresentation(e.target.value)}
-                    placeholder="Detalles de la presentación"
                     required
-                  />
+                  >
+                    <option value="">Seleccione una opción</option>
+                    <option value="Individual">Individual</option>
+                    <option value="Paquete">Paquete</option>
+                  </select>
                 </div>
                 <div className="form-buttons">
                   <button
@@ -219,7 +241,11 @@ const FormularioComprador = () => {
                   >
                     Regresar
                   </button>
-                  <button type="submit" className="btn-comprar">
+                  <button
+                    type="button"
+                    className="btn-comprar"
+                    onClick={handleSubmit}
+                  >
                     Comprar
                   </button>
                 </div>

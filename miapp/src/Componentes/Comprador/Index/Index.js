@@ -19,8 +19,8 @@ function IndexComprador() {
   const [regionFilter, setRegionFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
 
-  const handleFormComprador = () => {
-    navigate("/formulario");
+  const handleFormComprador = (product) => {
+    navigate("/formulario", { state: { product } });
   };
 
   return (
@@ -43,7 +43,7 @@ function IndexComprador() {
               <option value="tipo3">Gelatinas</option>
               <option value="tipo4">Cremosos</option>
               <option value="tipo5">Galletas</option>
-              <option value="tipo6">Frios</option>
+              <option value="tipo6">Platos Frios</option>
             </select>
             <select
               className="filterDropdownUnique"
@@ -57,7 +57,9 @@ function IndexComprador() {
               <option value="region2">Amazonica</option>
               <option value="region3">Caribe</option>
               <option value="region4">Pacifica</option>
-              <option value="region5">Otra</option>
+              <option value="region5">Insular</option>
+              <option value="region6">Orinoquia</option>
+              <option value="region7">Otra</option>
             </select>
             <select
               className="filterDropdownUnique"
@@ -162,9 +164,8 @@ function IndexComprador() {
               <div className="itemActionsUnique">
                 <span className="itemPriceUnique">{product.price}</span>
                 <button
-                  onClick={handleFormComprador}
-                  className="purchaseButtonUnique"
-                >
+                  onClick={() => handleFormComprador(product)}
+                  className="purchaseButtonUnique">
                   Comprar
                 </button>
               </div>

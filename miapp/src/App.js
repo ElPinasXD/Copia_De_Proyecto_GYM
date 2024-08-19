@@ -15,6 +15,7 @@ import Form from "./Componentes/Registro/Form";
 import IndexVendedor from "./Componentes/Vendendor/IndexVendedor";
 import MensajeComprado from "./Componentes/Comprador/Formulario/MensajeComprado";
 import FormularioPago from "./Componentes/Comprador/Formulario/FormularioPago";
+import Publicar from "./Componentes/Vendendor/Publicar/Publicar";
 
 // Componente que decide si renderizar el Header y el Footer
 const Layout = ({ children }) => {
@@ -94,6 +95,7 @@ function App() {
             </Layout>
           }
         />
+        <Route path="/Publicar" element={<Layout><Publicar /></Layout>} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,6 @@
 import React from "react";
-import "./Header.css"; // Importa el archivo de estilos
+import "./Header.css";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import Logo from "../../assets/images/LogoTemporal.png";
 
 function Header() {
@@ -9,11 +8,15 @@ function Header() {
   const location = useLocation();
 
   const isIndexVendedor = location.pathname === "/IndexVendedor";
-  const isHomePage = location.pathname === "/"; // Verifica si estamos en la página principal
+  const isHomePage = location.pathname === "/";
 
   const handleButtonClick = (path) => {
     navigate(path);
   };
+
+  if (isIndexVendedor) {
+    return null; // No renderizar el header en IndexVendedor
+  }
 
   return (
     <header className="headerUnique">
@@ -37,14 +40,12 @@ function Header() {
             </button>
           </>
         )}
-        {!isHomePage && (
+        {!isHomePage && !isIndexVendedor && (
           <button
-            onClick={() =>
-              handleButtonClick(isIndexVendedor ? "/" : "/registro")
-            }
-            className="header-buttonUnique"
+            onClick={() => handleButtonClick("/registro")}
+            className="header-buttonUniqueLog"
           >
-            {isIndexVendedor ? "Cerrar Sesión" : "Registrarse"}
+            Registrarse
           </button>
         )}
       </div>
