@@ -7,7 +7,6 @@ function SideMenu({ onPublicar, onPedidos, onClose, isOpen }) {
     const navigate = useNavigate();
 
     const handleCerrarSesion = () => {
-        // Aquí puedes añadir lógica para cerrar sesión si es necesario
         navigate('/'); // Navega al índice principal
     };
 

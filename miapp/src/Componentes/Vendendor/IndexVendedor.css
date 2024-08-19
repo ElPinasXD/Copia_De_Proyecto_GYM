@@ -1,18 +1,47 @@
 .index-container {
     padding: 20px;
     text-align: center;
+    transition: margin-left 0.3s ease-in-out;
+    /* Transición para el contenido principal */
+    position: relative;
 }
 
 .menu-icon {
     font-size: 42px;
     cursor: pointer;
     position: absolute;
-    top: 20px;
+    top: 30px;
     left: 50px;
-    transition: left 0.3s ease-in-out;
+    /* Ajusta según tus necesidades */
+    z-index: 1100;
+    /* Asegúrate de que esté sobre otros elementos */
+    transition: transform 0.3s ease-in-out;
     /* Transición para el ícono del menú */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.menu-icon div {
+    width: 30px;
+    height: 3px;
+    background-color: #000;
+    margin: 5px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Transiciones para cuando el menú está abierto */
+.menu-icon.open div:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.menu-icon.open div:nth-child(2) {
+    transform: translateY(-1px) rotate(-47deg);
+}
+
+.menu-icon.open div:nth-child(3) {
+    transform: translateY(-15px) rotate(-47deg);
+}
 
 .side-menu {
     position: fixed;
@@ -27,13 +56,14 @@
     flex-direction: column;
     align-items: center;
     z-index: 1000;
+    /* Menú debajo del ícono */
     transition: left 0.3s ease-in-out;
     /* Añade la transición */
 }
 
 .side-menu.open {
     left: 0;
-    /* Cuando está abierto, se mueve a la posición visible */
+    /* Mueve el menú a la posición visible */
 }
 
 .side-menu-logo {
@@ -41,6 +71,7 @@
     width: auto;
     max-width: 200px;
     margin-bottom: 152px;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
 }
 
 .menu-button {

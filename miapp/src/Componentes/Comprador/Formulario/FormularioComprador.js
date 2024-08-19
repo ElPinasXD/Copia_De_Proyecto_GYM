@@ -11,6 +11,7 @@ const FormularioComprador = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [presentation, setPresentation] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
@@ -104,6 +105,25 @@ const FormularioComprador = () => {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
+                  />
+                </div>
+                <div className="form-field">
+                  <label htmlFor="phoneNumber">Número de Teléfono</label>
+                  <input
+                    className="form-input"
+                    id="phoneNumber"
+                    placeholder="0000000000"
+                    type="text"
+                    value={phoneNumber}
+                    onChange={(e) => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      if (value.length <= 10) {
+                        setPhoneNumber(value);
+                      }
+                    }}
+                    required
+                    maxLength="10"
+                    pattern="\d{10}"
                   />
                 </div>
                 <div className="form-buttons">

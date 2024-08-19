@@ -82,6 +82,7 @@ function Publicar() {
                             type="file"
                             className="file-input"
                             onChange={handleChange}
+                            accept=".jpg, .png"
                             required // Campo obligatorio
                         />
                     </div>
