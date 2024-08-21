@@ -104,3 +104,33 @@
     background-color: #ce3131;
     color: #ffffff;
 }
+
+/* Parte de Mensaje Producto*/
+.confirmacion-container {
+    margin: 96px;
+    text-align: center;
+    background-color: #e8f5e9;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.checkmark {
+    font-size: 48px;
+    color: #1b5e20;
+    margin-bottom: 10px;
+}
+
+.botonVolver {
+
+    margin-top: 20px;
+    padding: 8px;
+    background-color: #4caf50;
+    color: white;
+    width: 120px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: center;
+}

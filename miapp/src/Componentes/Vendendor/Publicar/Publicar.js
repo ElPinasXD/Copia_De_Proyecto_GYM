@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Publicar.css';
+import MensajeProducto from './MensajeProducto';
 
 function Publicar() {
     const [formValues, setFormValues] = useState({
@@ -12,6 +13,7 @@ function Publicar() {
     });
 
     const [errors, setErrors] = useState({});
+    const [isMessageVisible, setIsMessageVisible] = useState(false); // Estado para controlar la visibilidad del mensaje
 
     const handleChange = (e) => {
         const { id, value, type, files } = e.target;
@@ -23,7 +25,6 @@ function Publicar() {
 
     const validateForm = () => {
         const newErrors = {};
-        // Aquí es opcional validar manualmente si prefieres mostrar mensajes personalizados
         if (!formValues.name) newErrors.name = 'Nombre es obligatorio';
         if (!formValues.price) newErrors.price = 'Precio es obligatorio';
         if (!formValues.image) newErrors.image = 'Imagen es obligatoria';
@@ -38,7 +39,7 @@ function Publicar() {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             console.log('Formulario enviado:', formValues);
-            // Aquí podrías enviar los datos al servidor o manejar el envío como necesites
+            setIsMessageVisible(true); // Mostrar el mensaje al enviar el formulario correctamente
         } else {
             setErrors(formErrors);
         }
@@ -46,98 +47,104 @@ function Publicar() {
 
     return (
         <div className="container">
-            <h1 className="title">Ingrese datos del producto</h1>
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Nombre</label>
-                    <input
-                        id="name"
-                        type="text"
-                        placeholder="Ingrese el nombre del producto"
-                        className="input"
-                        value={formValues.name}
-                        onChange={handleChange}
-                        required // Campo obligatorio
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="price">Precio</label>
-                    <input
-                        id="price"
-                        type="number"
-                        placeholder="Ingrese el precio del producto"
-                        className="input"
-                        value={formValues.price}
-                        onChange={handleChange}
-                        required // Campo obligatorio
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="image">Imagen del producto</label>
-                    <div className="upload-container">
-                        <UploadIcon className="upload-icon" />
-                        <p className="upload-text">Seleccionar archivo</p>
-                        <input
-                            id="image"
-                            type="file"
-                            className="file-input"
-                            onChange={handleChange}
-                            accept=".jpg, .png"
-                            required // Campo obligatorio
-                        />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Descripción</label>
-                    <textarea
-                        id="description"
-                        placeholder="Ingrese la descripción del producto"
-                        className="textarea"
-                        value={formValues.description}
-                        onChange={handleChange}
-                        required // Campo obligatorio
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="region">Región de origen</label>
-                    <select
-                        id="region"
-                        className="select"
-                        value={formValues.region}
-                        onChange={handleChange}
-                        required // Campo obligatorio
-                    >
-                        <option value="" disabled>Seleccione la región</option>
-                        <option value="andina">Andina</option>
-                        <option value="amazonica">Amazónica</option>
-                        <option value="caribe">Caribe</option>
-                        <option value="pacifica">Pacífica</option>
-                        <option value="insular">Insular</option>
-                        <option value="orinoquia">Orinoquia</option>
-                        <option value="otra">Otra</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="type">Tipo de producto</label>
-                    <select
-                        id="type"
-                        className="select"
-                        value={formValues.type}
-                        onChange={handleChange}
-                        required // Campo obligatorio
-                    >
-                        <option value="" disabled>Seleccione el tipo</option>
-                        <option value="horneados">Horneados</option>
-                        <option value="fritos">Fritos</option>
-                        <option value="gelatinas">Gelatinas</option>
-                        <option value="cremosos">Cremosos</option>
-                        <option value="galletas">Galletas</option>
-                        <option value="platosF">Platos Fríos</option>
-                        <option value="otro">Otro</option>
-                    </select>
-                </div>
-                <button type="submit" className="submit-button">Publicar</button>
-            </form>
+            {isMessageVisible ? (
+                <MensajeProducto />
+            ) : (
+                <>
+                    <h1 className="title">Ingrese datos del producto</h1>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="name">Nombre</label>
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Ingrese el nombre del producto"
+                                className="input"
+                                value={formValues.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="price">Precio</label>
+                            <input
+                                id="price"
+                                type="number"
+                                placeholder="Ingrese el precio del producto"
+                                className="input"
+                                value={formValues.price}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="image">Imagen del producto</label>
+                            <div className="upload-container">
+                                <UploadIcon className="upload-icon" />
+                                <p className="upload-text">Seleccionar archivo</p>
+                                <input
+                                    id="image"
+                                    type="file"
+                                    className="file-input"
+                                    onChange={handleChange}
+                                    accept=".jpg, .png"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="description">Descripción</label>
+                            <textarea
+                                id="description"
+                                placeholder="Ingrese la descripción del producto"
+                                className="textarea"
+                                value={formValues.description}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="region">Región de origen</label>
+                            <select
+                                id="region"
+                                className="select"
+                                value={formValues.region}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="" disabled>Seleccione la región</option>
+                                <option value="andina">Andina</option>
+                                <option value="amazonica">Amazónica</option>
+                                <option value="caribe">Caribe</option>
+                                <option value="pacifica">Pacífica</option>
+                                <option value="insular">Insular</option>
+                                <option value="orinoquia">Orinoquia</option>
+                                <option value="otra">Otra</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="type">Tipo de producto</label>
+                            <select
+                                id="type"
+                                className="select"
+                                value={formValues.type}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="" disabled>Seleccione el tipo</option>
+                                <option value="horneados">Horneados</option>
+                                <option value="fritos">Fritos</option>
+                                <option value="gelatinas">Gelatinas</option>
+                                <option value="cremosos">Cremosos</option>
+                                <option value="galletas">Galletas</option>
+                                <option value="platosF">Platos Fríos</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <button type="submit" className="submit-button">Publicar</button>
+                    </form>
+                </>
+            )}
         </div>
     );
 }
