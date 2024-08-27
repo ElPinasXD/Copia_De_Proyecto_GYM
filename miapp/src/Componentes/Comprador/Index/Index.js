@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+// Index.js
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Index.css"; // Importa el archivo de estilos
+import { useSearch } from "./SearchContext"; // Asegúrate de importar el hook
 
 import ManjarBlanco from "../../../assets/images/549936eba4d64d3bfe7f905b0a2bbc1a.jpg";
 import BocadilloGuayaba from "../../../assets/images/bocadillo_de_guayaba.jpg";
@@ -15,9 +17,11 @@ import ArequipeCasero from "../../../assets/images/RV2UGXYKRREGTLRYXX5LYEXFUU.jp
 
 function IndexComprador() {
   const navigate = useNavigate();
-  const [typeFilter, setTypeFilter] = useState("");
-  const [regionFilter, setRegionFilter] = useState("");
-  const [priceFilter, setPriceFilter] = useState("");
+  const { searchTerm } = useSearch(); // Obtener el término de búsqueda desde el contexto
+
+  const [typeFilter, setTypeFilter] = React.useState("");
+  const [regionFilter, setRegionFilter] = React.useState("");
+  const [priceFilter, setPriceFilter] = React.useState("");
 
   const products = [
     { id: 1, name: "Bocadillo de Guayaba", description: "Delicioso bocadillo de guayaba, hecho con fruta fresca y azúcar.", price: "$1200", type: "Horneados", region: "Andina", image: BocadilloGuayaba },
@@ -46,7 +50,10 @@ function IndexComprador() {
           parseInt(product.price.slice(1)) <= 4900) ||
         (priceFilter === "Más de $5100" && parseInt(product.price.slice(1)) > 5100);
 
-      return matchesType && matchesRegion && matchesPrice;
+      const matchesSearchTerm =
+        searchTerm === "" || product.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      return matchesType && matchesRegion && matchesPrice && matchesSearchTerm;
     });
   };
 

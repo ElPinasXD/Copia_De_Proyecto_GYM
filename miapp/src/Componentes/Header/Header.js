@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Header.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/LogoTemporal.png";
+import { useSearch } from "../Comprador/Index/SearchContext";
 
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
+  const { searchTerm, setSearchTerm } = useSearch();  
 
   const isIndexVendedor = location.pathname === "/IndexVendedor";
   const isHomePage = location.pathname === "/";
@@ -17,8 +18,6 @@ function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Aquí puedes implementar la lógica de búsqueda
-    console.log("Búsqueda:", searchTerm);
   };
 
   if (isIndexVendedor) {
