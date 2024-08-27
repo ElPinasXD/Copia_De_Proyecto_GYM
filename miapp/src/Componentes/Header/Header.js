@@ -12,6 +12,10 @@ function Header() {
   const isIndexVendedor = location.pathname === "/IndexVendedor";
   const isHomePage = location.pathname === "/";
 
+  const handleVolverIndex = () => {
+    navigate("/");
+  }
+
   const handleButtonClick = (path) => {
     navigate(path);
   };
@@ -27,7 +31,7 @@ function Header() {
   return (
     <header className="headerUnique">
       <div className="logoUnique">
-        <img src={Logo} alt="Logo" className="logo-imageUnique" />
+        <img src={Logo} onClick={handleVolverIndex} alt="Logo" className="logo-imageUnique" />
       </div>
       <form onSubmit={handleSearch} className="search-form">
         <input
@@ -50,13 +54,13 @@ function Header() {
               {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
             </div>
             <button
-              onClick={() => handleButtonClick("/registro")}
+              onClick={() => handleButtonClick("/Registro")}
               className="header-buttonUnique"
             >
               Registrarse
             </button>
             <button
-              onClick={() => handleButtonClick("/login")}
+              onClick={() => handleButtonClick("/Login")}
               className="header-buttonUnique"
             >
               Iniciar Sesión

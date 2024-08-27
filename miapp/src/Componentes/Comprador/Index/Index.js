@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import "./Index.css"; // Importa el archivo de estilos
 import { useSearch } from "./SearchContext"; 
 
@@ -15,24 +14,24 @@ import Panelitas from "../../../assets/images/receta-para-preparar-panelitas-de-
 import ArequipeCasero from "../../../assets/images/RV2UGXYKRREGTLRYXX5LYEXFUU.jpg";
 
 function IndexComprador() {
-  const navigate = useNavigate();
   const { searchTerm, addToCart } = useSearch(); // Obtener el término de búsqueda desde el contexto
 
-  const [typeFilter, setTypeFilter] =  React.useState("");
+  const [typeFilter, setTypeFilter] = React.useState("");
   const [regionFilter, setRegionFilter] = React.useState("");
   const [priceFilter, setPriceFilter] = React.useState("");
+  const [vendorFilter, setVendorFilter] = React.useState(""); // Nuevo estado para el filtro de vendedores
 
   const products = [
-    { id: 1, name: "Bocadillo de Guayaba", description: "Delicioso bocadillo de guayaba, hecho con fruta fresca y azúcar.", price: "$1200", type: "Horneados", region: "Andina", image: BocadilloGuayaba },
-    { id: 2, name: "Arequipe Casero", description: "Delicioso arequipe hecho con leche fresca y azúcar.", price: "$3000", type: "Cremosos", region: "Amazonica", image: ArequipeCasero },
-    { id: 3, name: "Dulce de Mora", description: "Delicioso dulce de mora, hecho con fruta fresca y azúcar.", price: "$2100", type: "Gelatinas", region: "Caribe", image: DulceMora },
-    { id: 4, name: "Panelitas de Maíz", description: "Deliciosas panelitas de maíz.", price: "$3200", type: "Horneados", region: "Pacifica", image: PanelitasMaíz },
-    { id: 5, name: "Arequipe", description: "Delicioso dulce hecho con leche y azúcar.", price: "$3700", type: "Cremosos", region: "Insular", image: Arequipe },
-    { id: 6, name: "Cocadas", description: "Dulce de coco rallado, azúcar y huevo.", price: "$2200", type: "Fritos", region: "Orinoquia", image: Cocadas },
-    { id: 7, name: "Manjar Blanco", description: "Dulce de leche con azúcar y canela.", price: "$2600", type: "Cremosos", region: "Andina", image: ManjarBlanco },
-    { id: 8, name: "Panelitas", description: "Deliciosas panelitas hechas con panela, leche y coco rallado.", price: "$1900", type: "Horneados", region: "Amazonica", image: Panelitas },
-    { id: 9, name: "Buñuelos", description: "Dulce frito de harina, queso, huevo y sal.", price: "$2000", type: "Fritos", region: "Caribe", image: Buñuelos },
-    { id: 10, name: "Natilla", description: "Postre cremoso de leche, maicena, azúcar y canela.", price: "$2500", type: "Cremosos", region: "Pacifica", image: Natilla },
+    { id: 1, name: "Bocadillo de Guayaba", description: "Delicioso bocadillo de guayaba, hecho con fruta fresca y azúcar.", price: "$1200", type: "Horneados", region: "Andina", vendor: "Vendedor 1", image: BocadilloGuayaba },
+    { id: 2, name: "Arequipe Casero", description: "Delicioso arequipe hecho con leche fresca y azúcar.", price: "$3000", type: "Cremosos", region: "Amazonica", vendor: "Vendedor 2", image: ArequipeCasero },
+    { id: 3, name: "Dulce de Mora", description: "Delicioso dulce de mora, hecho con fruta fresca y azúcar.", price: "$2100", type: "Gelatinas", region: "Caribe", vendor: "Vendedor 3", image: DulceMora },
+    { id: 4, name: "Panelitas de Maíz", description: "Deliciosas panelitas de maíz.", price: "$3200", type: "Horneados", region: "Pacifica", vendor: "Vendedor 4", image: PanelitasMaíz },
+    { id: 5, name: "Arequipe", description: "Delicioso dulce hecho con leche y azúcar.", price: "$3700", type: "Cremosos", region: "Insular", vendor: "Vendedor 5", image: Arequipe },
+    { id: 6, name: "Cocadas", description: "Dulce de coco rallado, azúcar y huevo.", price: "$2200", type: "Fritos", region: "Orinoquia", vendor: "Vendedor 1", image: Cocadas },
+    { id: 7, name: "Manjar Blanco", description: "Dulce de leche con azúcar y canela.", price: "$2600", type: "Cremosos", region: "Andina", vendor: "Vendedor 2", image: ManjarBlanco },
+    { id: 8, name: "Panelitas", description: "Deliciosas panelitas hechas con panela, leche y coco rallado.", price: "$1900", type: "Horneados", region: "Amazonica", vendor: "Vendedor 3", image: Panelitas },
+    { id: 9, name: "Buñuelos", description: "Dulce frito de harina, queso, huevo y sal.", price: "$2000", type: "Fritos", region: "Caribe", vendor: "Vendedor 4", image: Buñuelos },
+    { id: 10, name: "Natilla", description: "Postre cremoso de leche, maicena, azúcar y canela.", price: "$2500", type: "Cremosos", region: "Pacifica", vendor: "Vendedor 5", image: Natilla },
   ];
 
   const getFilteredProducts = () => {
@@ -46,9 +45,11 @@ function IndexComprador() {
           parseInt(product.price.slice(1)) <= 4900) ||
         (priceFilter === "Más de $5100" && parseInt(product.price.slice(1)) > 5100);
 
+      const matchesVendor = vendorFilter === "" || product.vendor === vendorFilter; // Filtro de vendedores
+
       const matchesSearchTerm = searchTerm === "" || product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-      return matchesType && matchesRegion && matchesPrice && matchesSearchTerm;
+      return matchesType && matchesRegion && matchesPrice && matchesSearchTerm && matchesVendor;
     });
   };
 
@@ -102,7 +103,18 @@ function IndexComprador() {
               <option value="$2100 - $4900">$2100 - $4900</option>
               <option value="Más de $5100">Más de $5100</option>
             </select>
-            
+            <select
+              className="filterDropdownUnique"
+              value={vendorFilter}
+              onChange={(e) => setVendorFilter(e.target.value)}
+            >
+              <option value="">Vendedores</option>
+              <option value="Vendedor 1">Vendedor 1</option>
+              <option value="Vendedor 2">Vendedor 2</option>
+              <option value="Vendedor 3">Vendedor 3</option>
+              <option value="Vendedor 4">Vendedor 4</option>
+              <option value="Vendedor 5">Vendedor 5</option>
+            </select>
           </div>
         </div>
       </header>

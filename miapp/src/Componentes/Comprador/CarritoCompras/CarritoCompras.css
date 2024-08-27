@@ -1,86 +1,133 @@
 .carritoWrapper {
-    padding: 20px;
-  }
-  
-  .carritoItems {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .carritoItem {
-    display: flex;
-    margin-bottom: 15px;
-  }
-  
-  .carritoImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-  }
-  
-  .carritoDetails {
-    margin-left: 10px;
-  }
-  
-  .purchaseButton {
-    background-color: #f39c12;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .carritoItem {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .carritoImage {
-    width: 100px;
-    height: auto;
-    margin-right: 20px;
-  }
-  
-  .carritoDetails {
-    flex-grow: 1;
-  }
-  
-  .removeButton {
-    background-color: transparent;
-    color: #ce3131;
-    border: 2px solid #ce3131;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition:
-        background-color 0.2s,
-        color 0.2s,
-        border-color 0.2s;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-  }
-  
-  .removeButton:hover {
-    background-color: #ce3131;
-    color: #ffffff;
-  }
-  
-  .purchaseButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: transparent;
-    border: 2px solid #3182ce;
-    color: #3182ce;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition:
-        background-color 0.2s,
-        color 0.2s,
-        border-color 0.2s;
-  }
-  
-  .purchaseButton:hover {
-    background-color: #3182ce;
-    color: #ffffff;
-  }
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.headerMainTitle{
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.headerNimbusCarrito {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.carritoItems {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+}
+
+.carritoItem {
+  display: flex;
+  align-items: center; /* Asegura que todos los elementos hijos tengan la misma altura */
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  max-width: 750px; /* Ajusta el ancho máximo según tus necesidades */
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Opcional: Añade una sombra para el efecto de tarjeta */
+}
+
+.carritoImage {
+  width: 190px; /* Define un ancho fijo para las imágenes */
+  height: 130px; /* Define una altura fija para las imágenes */
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.carritoDetails {
+  text-align: center;
+  flex: 1; /* Permite que el área de detalles ocupe el espacio restante */
+}
+
+.removeButton {
+  background-color: transparent;
+  color: #ce3131;
+  border: 2px solid #ce3131;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  padding: 10px 20px;
+  font-size: 14px;
+  margin-left: 15px; /* Añade espacio entre el botón y el contenido */
+}
+
+.removeButton:hover {
+  background-color: #ce3131;
+  color: #ffffff;
+}
+
+.purchaseButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 2px solid #2db666;
+  color: #2db666;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.purchaseButton:hover {
+  background-color: #2db666;
+  color: #ffffff;
+}
+
+
+.quantity-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.quantity-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  padding: 52px 0px 0px 0px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre el botón y el campo de entrada, y entre los botones */
+}
+
+.quantity-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition:
+  background-color 0.3s ease,
+  transform 0.2s ease;
+}
+
+
+.quantity-btn:hover{
+  background-color: #e6e6e6;
+}
+
+.quantity-input {
+  width: 50px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+

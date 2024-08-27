@@ -24,7 +24,7 @@ import CarritoCompras from "./Componentes/Comprador/CarritoCompras/CarritoCompra
 // Componente que decide si renderizar el Header y el Footer
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideHeaderFooter = ["/login", "/registro", "/formulario"].includes(
+  const hideHeaderFooter = ["/Login", "/Registro", "/FormularioComprador"].includes(
     location.pathname,
   );
 
@@ -43,10 +43,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout><IndexComprador /></Layout>} />
-          <Route path="/formulario" element={<Layout><div className="form-container"><FormularioComprador /></div></Layout>} />
+          <Route path="/FormularioComprador" element={<Layout><div className="form-container"><FormularioComprador /></div></Layout>} />
           <Route path="/CarritoCompras" element={<Layout><CarritoCompras /></Layout>} />
-          <Route path="/login" element={<Layout><Login /></Layout>} />
-          <Route path="/registro" element={<Layout><Form /></Layout>} />
+          <Route path="/Login" element={<Layout><Login /></Layout>} />
+          <Route path="/Registro" element={<Layout><Form /></Layout>} />
           <Route path="/IndexVendedor" element={<Layout><IndexVendedor /></Layout>} />
           <Route path="/MensajeComprado" element={<Layout><MensajeComprado /></Layout>} />
           <Route path="/FormularioPago" element={<Layout><FormularioPago /></Layout>} />

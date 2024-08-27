@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Formulario.css";
 import FormularioPago from "./FormularioPago";
 import MensajeComprado from "./MensajeComprado";
 
 const FormularioComprador = () => {
-  const location = useLocation();
-  const selectedProduct = location.state?.product;
-
+  
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [quantity] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [presentation, setPresentation] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const [productPrice, setProductPrice] = useState(0);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
 
   const navigate = useNavigate();
 
-  /*Calcular el precio del producto*/
-  useEffect(() => {
-    if (selectedProduct) {
-      const price = parseFloat(selectedProduct.price.replace('$', ''));
-      setProductPrice(price * quantity);
-    }
-  }, [selectedProduct, quantity]);
-
-  const increment = () => setQuantity((prevQuantity) => prevQuantity + 1);
-  const decrement = () =>
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 1));
+  
 
 
 
   const handleVolverIndex = () => {
-    navigate("/");
+    navigate("/CarritoCompras");
   };
 
   const handleSubmit = (event) => {
@@ -146,66 +133,6 @@ const FormularioComprador = () => {
             </div>
           )}
           {currentStep === 2 && (
-            <div>
-              <div className="form-header">
-                <h3 className="form-title">Información de la compra</h3>
-              </div>
-              <div className="form-body">
-                <div className="form-field">
-                  <label htmlFor="product">Producto</label>
-                  <input
-                    type="text"
-                    id="product"
-                    className="form-input"
-                    value={selectedProduct?.name || ''}
-                    readOnly
-                  />
-                </div>
-                <div className="quantity-container">
-                  Cantidad
-                  <button className="quantity-btn" onClick={decrement}>
-                    -
-                  </button>
-                  <input
-                    type="text"
-                    className="quantity-input"
-                    value={quantity}
-                    readOnly
-                  />
-                  <button className="quantity-btn" onClick={increment}>
-                    +
-                  </button>
-                </div>
-                <div className="form-field">
-                  <label htmlFor="price">Precio Total</label>
-                  <input
-                    type="text"
-                    id="price"
-                    className="form-input"
-                    value={`$${productPrice.toFixed(2)}`}
-                    readOnly
-                  />
-                </div>
-                <div className="form-buttons">
-                  <button
-                    type="button"
-                    className="btn-regresar"
-                    onClick={handlePrevStep}
-                  >
-                    Regresar
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-siguiente"
-                    onClick={handleNextStep}
-                  >
-                    Siguiente
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {currentStep === 3 && (
             <div>
               <div className="form-header">
                 <h3 className="form-title">Información de la compra</h3>

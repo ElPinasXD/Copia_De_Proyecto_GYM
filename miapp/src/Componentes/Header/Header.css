@@ -1,21 +1,23 @@
 .headerUnique {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Centra todos los elementos horizontalmente */
   align-items: center;
   padding: 1rem;
   background-color: #ffffff;
   border-bottom: 1px solid #e2e8f0;
   flex-wrap: wrap;
+  position: relative; /* Añadido para que los elementos secundarios puedan ser posicionados */
 }
 
 .logoUnique {
-  flex: 0 1 auto;
-  margin-right: 1rem;
+  position: absolute; /* Posiciona el logo en la parte izquierda */
+  left: 1rem;
 }
 
 .logo-imageUnique {
   height: 60px;
   width: auto;
+  cursor: pointer;
 }
 
 .search-form {
@@ -26,8 +28,7 @@
   background-color: #dddddd;
   border-radius: 15px;
   padding: 5px 10px;
-  margin: 0.5rem ;
-  margin-left: 242px;
+  margin: 0.5rem;
 }
 
 .search-input {
@@ -55,6 +56,8 @@
 }
 
 .header-buttons-container {
+  position: absolute; /* Posiciona los botones en la parte derecha */
+  right: 1rem;
   display: flex;
   align-items: center;
   gap: 1em;
@@ -65,9 +68,8 @@
   margin-top: 5px;
   margin-right: 25px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  position: relative;
 }
-
 
 .header-buttonUnique,
 .header-buttonUniqueLog {
@@ -91,14 +93,15 @@
   color: #ffffff;
 }
 
-.cart-badge{
+.cart-badge {
   font-size: 1.2rem;
-  position: fixed;
   background-color: #ce3131;
-  border-radius: 10px;  
+  border-radius: 10px;
   padding: 4px 9px;
   color: #ffffff;
-  margin-top: 6px;
+  position: absolute; /* Coloca el badge dentro del contenedor del carrito */
+  top: -10px; /* para que esté en la esquina superior derecha del icono del carrito */
+  right: -10px; /* para que esté en la esquina superior derecha del icono del carrito */
 }
 
 @media (max-width: 768px) {
@@ -108,6 +111,7 @@
   }
 
   .logoUnique {
+    position: static; /* Desactiva la posición absoluta en pantallas pequeñas */
     align-self: center;
     margin-bottom: 1rem;
   }
@@ -125,6 +129,7 @@
     order: 2;
     justify-content: center;
     flex-wrap: wrap;
+    position: static; /* Desactiva la posición absoluta en pantallas pequeñas */
   }
 
   .IconoCarro {
