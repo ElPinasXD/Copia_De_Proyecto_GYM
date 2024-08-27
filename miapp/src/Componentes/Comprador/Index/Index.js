@@ -1,8 +1,7 @@
-// Index.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Index.css"; // Importa el archivo de estilos
-import { useSearch } from "./SearchContext"; // Asegúrate de importar el hook
+import { useSearch } from "./SearchContext"; 
 
 import ManjarBlanco from "../../../assets/images/549936eba4d64d3bfe7f905b0a2bbc1a.jpg";
 import BocadilloGuayaba from "../../../assets/images/bocadillo_de_guayaba.jpg";
@@ -17,9 +16,9 @@ import ArequipeCasero from "../../../assets/images/RV2UGXYKRREGTLRYXX5LYEXFUU.jp
 
 function IndexComprador() {
   const navigate = useNavigate();
-  const { searchTerm } = useSearch(); // Obtener el término de búsqueda desde el contexto
+  const { searchTerm, addToCart } = useSearch(); // Obtener el término de búsqueda desde el contexto
 
-  const [typeFilter, setTypeFilter] = React.useState("");
+  const [typeFilter, setTypeFilter] =  React.useState("");
   const [regionFilter, setRegionFilter] = React.useState("");
   const [priceFilter, setPriceFilter] = React.useState("");
 
@@ -38,20 +37,16 @@ function IndexComprador() {
 
   const getFilteredProducts = () => {
     return products.filter((product) => {
-      const matchesType =
-        typeFilter === "" || product.type === typeFilter;
-      const matchesRegion =
-        regionFilter === "" || product.region === regionFilter;
-      const matchesPrice =
-        priceFilter === "" ||
+      const matchesType = typeFilter === "" || product.type === typeFilter;
+      const matchesRegion = regionFilter === "" || product.region === regionFilter;
+      const matchesPrice = priceFilter === "" ||
         (priceFilter === "Menos de $2000" && parseInt(product.price.slice(1)) < 2000) ||
         (priceFilter === "$2100 - $4900" &&
           parseInt(product.price.slice(1)) >= 2100 &&
           parseInt(product.price.slice(1)) <= 4900) ||
         (priceFilter === "Más de $5100" && parseInt(product.price.slice(1)) > 5100);
 
-      const matchesSearchTerm =
-        searchTerm === "" || product.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearchTerm = searchTerm === "" || product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
       return matchesType && matchesRegion && matchesPrice && matchesSearchTerm;
     });
@@ -59,8 +54,8 @@ function IndexComprador() {
 
   const filteredProducts = getFilteredProducts();
 
-  const handleFormComprador = (product) => {
-    navigate("/formulario", { state: { product } });
+  const handleAddToCart = (product) => {
+    addToCart(product);
   };
 
   return (
@@ -127,10 +122,10 @@ function IndexComprador() {
                 <div className="itemActionsUnique">
                   <span className="itemPriceUnique">{product.price}</span>
                   <button
-                    onClick={() => handleFormComprador(product)}
+                    onClick={() => handleAddToCart(product)}
                     className="purchaseButtonUnique"
                   >
-                    Comprar
+                    Añadir al Carrito
                   </button>
                 </div>
               </div>

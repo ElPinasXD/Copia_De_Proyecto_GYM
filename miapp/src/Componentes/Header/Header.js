@@ -7,7 +7,7 @@ import { useSearch } from "../Comprador/Index/SearchContext";
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { searchTerm, setSearchTerm } = useSearch();  
+  const { searchTerm, setSearchTerm, cart } = useSearch();
 
   const isIndexVendedor = location.pathname === "/IndexVendedor";
   const isHomePage = location.pathname === "/";
@@ -45,9 +45,10 @@ function Header() {
       <div className="header-buttons-container">
         {isHomePage && (
           <>
-          <div className="IconoCarro">
-            <ion-icon name="cart-outline"></ion-icon>
-          </div>
+            <div className="IconoCarro" onClick={() => navigate("/CarritoCompras")}>
+              <ion-icon name="cart-outline"></ion-icon>
+              {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
+            </div>
             <button
               onClick={() => handleButtonClick("/registro")}
               className="header-buttonUnique"
@@ -61,14 +62,6 @@ function Header() {
               Iniciar Sesión
             </button>
           </>
-        )}
-        {!isHomePage && !isIndexVendedor && (
-          <button
-            onClick={() => handleButtonClick("/registro")}
-            className="header-buttonUniqueLog"
-          >
-            Registrarse
-          </button>
         )}
       </div>
     </header>

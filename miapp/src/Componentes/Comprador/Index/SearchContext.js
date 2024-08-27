@@ -4,9 +4,18 @@ const SearchContext = createContext();
 
 export function SearchProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  };
 
   return (
-    <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+    <SearchContext.Provider value={{ searchTerm, setSearchTerm, cart, addToCart, removeFromCart }}>
       {children}
     </SearchContext.Provider>
   );
