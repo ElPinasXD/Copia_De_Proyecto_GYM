@@ -183,6 +183,7 @@ function IndexComprador() {
               <option value="$2100 - $4900">$2100 - $4900</option>
               <option value="Más de $5100">Más de $5100</option>
             </select>
+            
           </div>
         </div>
       </header>

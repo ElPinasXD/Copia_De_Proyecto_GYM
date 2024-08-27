@@ -12,7 +12,7 @@ function Publicar() {
         type: '',
     });
 
-    const [errors, setErrors] = useState({});
+    const [ setErrors] = useState({});
     const [isMessageVisible, setIsMessageVisible] = useState(false); // Estado para controlar la visibilidad del mensaje
 
     const handleChange = (e) => {
