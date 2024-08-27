@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/LogoTemporal.png";
@@ -6,12 +6,19 @@ import Logo from "../../assets/images/LogoTemporal.png";
 function Header() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const isIndexVendedor = location.pathname === "/IndexVendedor";
   const isHomePage = location.pathname === "/";
 
   const handleButtonClick = (path) => {
     navigate(path);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Aquí puedes implementar la lógica de búsqueda
+    console.log("Búsqueda:", searchTerm);
   };
 
   if (isIndexVendedor) {
@@ -23,9 +30,25 @@ function Header() {
       <div className="logoUnique">
         <img src={Logo} alt="Logo" className="logo-imageUnique" />
       </div>
+      <form onSubmit={handleSearch} className="search-form">
+        <input
+          type="text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+        <button type="submit" className="search-button">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
+      </form>
+      
       <div className="header-buttons-container">
         {isHomePage && (
           <>
+          <div className="IconoCarro">
+            <ion-icon name="cart-outline"></ion-icon>
+          </div>
             <button
               onClick={() => handleButtonClick("/registro")}
               className="header-buttonUnique"
