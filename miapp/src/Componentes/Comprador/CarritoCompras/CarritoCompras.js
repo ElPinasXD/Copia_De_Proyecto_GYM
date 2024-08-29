@@ -43,6 +43,11 @@ function CarritoCompras() {
     }
   };
 
+  const handleClearCart = () => {
+    clearCart();
+    setQuantities({});
+  };
+
   return (
     <div className="carritoWrapper">
       <header className="headerNimbusCarrito">
@@ -54,44 +59,47 @@ function CarritoCompras() {
         {cart.length === 0 ? (
           <p>No hay productos en el carrito.</p>
         ) : (
-          cart.map((product) => {
-            const quantity = quantities[product.id] || 1;
-            const price = parseFloat(product.price.replace('$', '')) || 0;
-            const totalPrice = price * quantity;
+          <>
+            {cart.map((product) => {
+              const quantity = quantities[product.id] || 1;
+              const price = parseFloat(product.price.replace('$', '')) || 0;
+              const totalPrice = price * quantity;
 
-            return (
-              <div key={product.id} className="carritoItem">
-                <img src={product.image} alt={product.name} className="carritoImage" />
-                <div className="carritoDetails">
-                  <h3>{product.name}</h3>
-                  <span className="price">${totalPrice.toFixed(2)}</span>
-                </div>
-                <div className="quantity-container">
-                  <div className="quantity-label">Cantidad</div>
-                  <div className="quantity-controls">
-                    <button className="quantity-btn" onClick={() => decrement(product.id)}>
-                      -
-                    </button>
-                    <input
-                      type="text"
-                      className="quantity-input"
-                      value={quantity}
-                      readOnly
-                    />
-                    <button className="quantity-btn" onClick={() => increment(product.id)}>
-                      +
-                    </button>
+              return (
+                <div key={product.id} className="carritoItem">
+                  <img src={product.image} alt={product.name} className="carritoImage" />
+                  <div className="carritoDetails">
+                    <h3>{product.name}</h3>
+                    <span className="price">${totalPrice.toFixed(2)}</span>
                   </div>
+                  <div className="quantity-container">
+                    <div className="quantity-label">Cantidad</div>
+                    <div className="quantity-controls">
+                      <button className="quantity-btn" onClick={() => decrement(product.id)}>
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        className="quantity-input"
+                        value={quantity}
+                        readOnly
+                      />
+                      <button className="quantity-btn" onClick={() => increment(product.id)}>
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => removeFromCart(product.id)}
+                    className="removeButton"
+                  >
+                    Eliminar
+                  </button>
                 </div>
-                <button 
-                  onClick={() => removeFromCart(product.id)}
-                  className="removeButton"
-                >
-                  Eliminar
-                </button>
-              </div>
-            );
-          })
+              );
+            })}
+            
+          </>
         )}
       </div>
       <button onClick={handlePurchase} className="purchaseButton">

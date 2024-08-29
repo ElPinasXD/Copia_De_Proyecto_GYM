@@ -5,18 +5,16 @@ const SearchContext = createContext();
 export function SearchProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [cart, setCart] = useState(() => {
-    // Cargar el carrito desde localStorage
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
   useEffect(() => {
-    // Guardar el carrito en localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+    setCart((prevCart) => [...prevCart, product]);
   };
 
   const removeFromCart = (id) => {
@@ -25,6 +23,7 @@ export function SearchProvider({ children }) {
 
   const clearCart = () => {
     setCart([]);
+    localStorage.removeItem('cart');
   };
 
   const updateCartItemQuantity = (id, newQuantity) => {

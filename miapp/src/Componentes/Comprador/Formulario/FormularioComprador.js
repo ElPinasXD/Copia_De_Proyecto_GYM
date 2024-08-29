@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from "../Index/SearchContext"; // Asegúrate de que la ruta de importación sea correcta
 import FormularioPago from "./FormularioPago";
 import MensajeComprado from "./MensajeComprado";
 import "./Formulario.css";
@@ -12,20 +13,15 @@ const FormularioComprador = () => {
   const [isPurchased, setIsPurchased] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
-  const [cart, setCart] = useState([]);
+  const { cart, clearCart } = useSearch();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Obtiene el carrito del localStorage
-    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(storedCart);
-
-    // Redirige si el carrito está vacío
-    if (storedCart.length === 0) {
+    if (cart.length === 0 && !isPurchased) {
       navigate("/CarritoCompras");
     }
-  }, [navigate]);
+  }, [cart, navigate, isPurchased]);
 
   const handleVolverIndex = () => {
     navigate("/CarritoCompras");
@@ -46,8 +42,8 @@ const FormularioComprador = () => {
       products: cart.map((product) => ({
         id: product.id,
         name: product.name,
-        quantity: product.quantity || 1, // Asegúrate de tener esta cantidad en el carrito
-        price: product.price.replace('$', ''), // Eliminamos el signo de dólar
+        quantity: product.quantity || 1,
+        price: product.price.replace('$', ''),
         totalPrice: parseFloat(product.price.replace('$', '')) * (product.quantity || 1)
       })),
     };
@@ -61,11 +57,8 @@ const FormularioComprador = () => {
         body: JSON.stringify(orderDetails),
       });
       if (response.ok) {
-        setIsPurchased(true);
-        // Limpia el carrito en localStorage después de la compra
-        localStorage.removeItem('cart');
-        // Actualiza el estado del carrito
-        setCart([]);
+        clearCart(); // Limpia el carrito después de una compra exitosa
+        setIsPurchased(true); // Establece isPurchased a true
       } else {
         alert("Hubo un problema al procesar la compra.");
       }
@@ -92,12 +85,12 @@ const FormularioComprador = () => {
     setShowPaymentForm(false);
   };
 
+  if (isPurchased) {
+    return <MensajeComprado />;
+  }
+
   return (
     <div className="form-card">
-      {isPurchased ? (
-        <MensajeComprado />
-      ) : (
-        <>
           {currentStep === 1 && (
             <div>
               <div className="form-header">
@@ -219,8 +212,6 @@ const FormularioComprador = () => {
               </div>
             </div>
           )}
-        </>
-      )}
     </div>
   );
 };
