@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import './IndexVendedor.css';
 import SideMenu from './Menu';
 
 function IndexVendedor() {
     const [showSideMenu, setShowSideMenu] = useState(false);
     const menuRef = useRef(null);
-    const location = useLocation();
-    const username = location.state?.username || 'Vendedor'; // Usa el nombre de usuario o un valor por defecto
+    const [username, setUsername] = useState('Vendedor');
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
 
     const toggleSideMenu = () => {
         setShowSideMenu(!showSideMenu);

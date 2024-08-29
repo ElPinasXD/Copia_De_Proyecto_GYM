@@ -17,6 +17,12 @@ function Login() {
     }
   };
 
+  const handleLogin = () => {
+    // Aquí deberías validar el usuario con el backend
+    localStorage.setItem('username', username); // Almacena el nombre del usuario en localStorage
+    navigate('/IndexVendedor'); // Redirige al dashboard o página principal
+};
+
   const handleIndexVendedor = async (e) => {
     e.preventDefault();
     try {
@@ -60,7 +66,7 @@ function Login() {
           onChange={handleInputChange}
         />
         {error && <p className="error-message">{error}</p>}
-        <button type="submit" className="login-submit">
+        <button  onClick={handleLogin} type="submit" className="login-submit">
           Entrar
         </button>
       </form>

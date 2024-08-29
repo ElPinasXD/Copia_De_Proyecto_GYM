@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './VerPedidos.css';
 import BocadilloGuayaba from "../../../assets/images/bocadillo_de_guayaba.jpg";
 import ArequipeCasero from "../../../assets/images/RV2UGXYKRREGTLRYXX5LYEXFUU.jpg";
@@ -73,6 +73,14 @@ const mockData = [
 
 function VerPedidos() {
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const [, setUsername] = useState('');
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+        }
+    }, []);
 
     const handleViewMore = (order) => {
         setSelectedOrder(order);
@@ -100,15 +108,13 @@ function VerPedidos() {
                 <div className="modalOverlay">
                     <div className="modalContent">
                         <button className="closeModalButton" onClick={handleCloseModal}>X</button>
-                        {/* <img src={selectedOrder.image} alt={`Producto ${selectedOrder.id}`} className="modalImage" /> */}
                         <h3 className="modalTitle">{selectedOrder.clientName}</h3>
                         <p><strong>Dirección:</strong> {selectedOrder.address}</p>
                         <p><strong>Teléfono:</strong> {selectedOrder.phone}</p>
                         <p><strong>Producto:</strong> {selectedOrder.product}</p>
                         <p><strong>Cantidad:</strong> {selectedOrder.quantity}</p>
                         <p><strong>Precio:</strong> {selectedOrder.price}</p>
-                        <p><strong>Método de Pago:</strong> {selectedOrder.paymentMethod}</p>
-                        <p><strong>Presentación:</strong> {selectedOrder.presentation}</p>
+                        <p><strong>Método de pago:</strong> {selectedOrder.paymentMethod}</p>
                     </div>
                 </div>
             )}
