@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import './IndexVendedor.css';
 import SideMenu from './Menu';
 
 function IndexVendedor() {
     const [showSideMenu, setShowSideMenu] = useState(false);
     const menuRef = useRef(null);
+    const location = useLocation();
+    const username = location.state?.username || 'Vendedor'; // Usa el nombre de usuario o un valor por defecto
 
     const toggleSideMenu = () => {
         setShowSideMenu(!showSideMenu);
@@ -46,7 +48,7 @@ function IndexVendedor() {
                     isOpen={showSideMenu}
                 />
             </div>
-            <h1>Bienvenido, Vendedor</h1>
+            <h1>Bienvenido, {username}</h1>
             <Outlet /> {/* Renderiza el contenido basado en la ruta */}
         </div>
     );

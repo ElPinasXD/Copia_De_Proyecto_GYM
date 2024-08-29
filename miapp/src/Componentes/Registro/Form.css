@@ -1,108 +1,89 @@
 /* Estilos para el contenedor del formulario */
 .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f8f8f8; /* Fondo blanco suculento para contrastar con el formulario */
-    padding: 20px;
-  }
-  
-  .form-title {
-    font-size: 2rem;
-    margin-bottom: 10px; /* Ajustar el margen para reducir el espacio */
-    color: #333; /* Texto negro oscuro */
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .form-register {
-    background-color: #fff; /* Fondo blanco del formulario */
-    border: 1px solid #ddd; /* Borde gris claro para el formulario */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    padding: 20px;
-    width: 100%;
-    max-width: 400px; /* Tamaño máximo del formulario */
-    box-sizing: border-box; /* Incluir padding y border en el ancho total */
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc; /* Borde gris para los inputs */
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #333; /* Texto negro oscuro */
-    box-sizing: border-box; /* Incluir padding y border en el ancho total */
-  }
-  
-  .form-input::placeholder {
-    color: #888; /* Texto del placeholder en gris claro */
-  }
-  
-  .form-submit {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #333; /* Botón negro */
-    color: #fff; /* Texto blanco en el botón */
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .form-submit:hover {
-    background-color: #555; /* Fondo gris oscuro en hover */
-  }
-  
-  .login-prompt {
-    margin-top: 15px; /* Reducir el espacio superior */
-    font-size: 1rem;
-    color: #333; /* Texto negro oscuro */
-  }
-  
-  .login-button {
-    background: none;
-    border: none;
-    color: #333;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
-  .login-button:hover {
-    color: #555; /* Gris oscuro en hover */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f8f8; /* Fondo blanco suculento para contrastar con el formulario */
+  padding: 20px;
+}
 
+.form-title {
+  font-size: 2rem;
+  margin-bottom: 10px; /* Ajustar el margen para reducir el espacio */
+  color: #333; /* Texto negro oscuro */
+  font-family: 'Arial', sans-serif;
+}
 
-  .input-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .input-container .form-input {
-    flex-grow: 1;
-    margin-bottom: 0;
-  }
-  
-  .error-message {
-    position: absolute;
-    right: -200px; /* Ajusta este valor según sea necesario */
-    color: #0F0F0F;
-    background-color: #fff;
-    border-radius: 7px;
-    padding: 10px;
-    font-size: 1rem;
-    white-space: nowrap;
-  }
-  
-  /* Asegúrate de que el contenedor del formulario tenga suficiente ancho */
-  .form-register {
-    max-width: 500px; /* Aumenta este valor si es necesario */
-    position: relative; /* Añade esta línea */
-  }
+.form-register {
+  background-color: #fff; /* Fondo blanco del formulario */
+  border: 1px solid #ddd; /* Borde gris claro para el formulario */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 20px;
+  width: 100%;
+  max-width: 500px; /* Tamaño máximo del formulario */
+  box-sizing: border-box; /* Incluir padding y border en el ancho total */
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc; /* Borde gris para los inputs */
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333; /* Texto negro oscuro */
+  box-sizing: border-box; /* Incluir padding y border en el ancho total */
+}
+
+.form-input::placeholder {
+  color: #888; /* Texto del placeholder en gris claro */
+}
+
+.form-submit {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333; /* Botón negro */
+  color: #fff; /* Texto blanco en el botón */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+  background-color: #555; /* Fondo gris oscuro en hover */
+}
+
+.login-prompt {
+  margin-top: 15px; /* Reducir el espacio superior */
+  font-size: 1rem;
+  color: #333; /* Texto negro oscuro */
+}
+
+.login-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.login-button:hover {
+  color: #555; /* Gris oscuro en hover */
+}
+
+.input-container {
+  position: relative;
+}
+
+.password-error{
+  color: #FF0000; /* Rojo para el mensaje de error */
+  font-size: 0.875rem; /* Tamaño de fuente pequeño */
+  margin-top: 5px; /* Espacio encima del mensaje de error */
+  text-align: center;
+}

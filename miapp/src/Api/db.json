@@ -159,5 +159,25 @@
       ]
     }
   ],
-  "products": []
+  "products": [],
+  "Vendedor": [
+    {
+      "id": "a478",
+      "Nombre": "Esteban ",
+      "Apellido": "Piñeros Peña",
+      "Correo": "estebanpinerosnadj@gmail.com",
+      "Telefono": "3196699831",
+      "Usuario": "estebanpineros",
+      "Contraseña": "Soyesteban1029142018"
+    },
+    {
+      "id": "5b48",
+      "Nombre": "Pepino",
+      "Apellido": "Perez",
+      "Correo": "apimu11@hotmail.com",
+      "Telefono": "3028379495",
+      "Usuario": "Vendedor",
+      "Contraseña": "Soyesteban1029*"
+    }
+  ]
 }
