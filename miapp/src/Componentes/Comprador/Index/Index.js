@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Index.css"; // Importa el archivo de estilos
 import { useSearch } from "./SearchContext"; 
 
@@ -14,28 +14,140 @@ import Panelitas from "../../../assets/images/receta-para-preparar-panelitas-de-
 import ArequipeCasero from "../../../assets/images/RV2UGXYKRREGTLRYXX5LYEXFUU.jpg";
 
 function IndexComprador() {
-  const { searchTerm, addToCart } = useSearch(); // Obtener el término de búsqueda desde el contexto
-
-  const [typeFilter, setTypeFilter] = React.useState("");
-  const [regionFilter, setRegionFilter] = React.useState("");
-  const [priceFilter, setPriceFilter] = React.useState("");
-  const [vendorFilter, setVendorFilter] = React.useState(""); // Nuevo estado para el filtro de vendedores
+  const { searchTerm, addToCart } = useSearch(); 
+  const [typeFilter, setTypeFilter] = useState("");
+  const [regionFilter, setRegionFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState("");
+  const [vendorFilter, setVendorFilter] = useState(""); 
 
   const products = [
-    { id: 1, name: "Bocadillo de Guayaba", description: "Delicioso bocadillo de guayaba, hecho con fruta fresca y azúcar.", price: "$1200", type: "Horneados", region: "Andina", vendor: "Vendedor 1", image: BocadilloGuayaba },
-    { id: 2, name: "Arequipe Casero", description: "Delicioso arequipe hecho con leche fresca y azúcar.", price: "$3000", type: "Cremosos", region: "Amazonica", vendor: "Vendedor 2", image: ArequipeCasero },
-    { id: 3, name: "Dulce de Mora", description: "Delicioso dulce de mora, hecho con fruta fresca y azúcar.", price: "$2100", type: "Gelatinas", region: "Caribe", vendor: "Vendedor 3", image: DulceMora },
-    { id: 4, name: "Panelitas de Maíz", description: "Deliciosas panelitas de maíz.", price: "$3200", type: "Horneados", region: "Pacifica", vendor: "Vendedor 4", image: PanelitasMaíz },
-    { id: 5, name: "Arequipe", description: "Delicioso dulce hecho con leche y azúcar.", price: "$3700", type: "Cremosos", region: "Insular", vendor: "Vendedor 5", image: Arequipe },
-    { id: 6, name: "Cocadas", description: "Dulce de coco rallado, azúcar y huevo.", price: "$2200", type: "Fritos", region: "Orinoquia", vendor: "Vendedor 1", image: Cocadas },
-    { id: 7, name: "Manjar Blanco", description: "Dulce de leche con azúcar y canela.", price: "$2600", type: "Cremosos", region: "Andina", vendor: "Vendedor 2", image: ManjarBlanco },
-    { id: 8, name: "Panelitas", description: "Deliciosas panelitas hechas con panela, leche y coco rallado.", price: "$1900", type: "Horneados", region: "Amazonica", vendor: "Vendedor 3", image: Panelitas },
-    { id: 9, name: "Buñuelos", description: "Dulce frito de harina, queso, huevo y sal.", price: "$2000", type: "Fritos", region: "Caribe", vendor: "Vendedor 4", image: Buñuelos },
-    { id: 10, name: "Natilla", description: "Postre cremoso de leche, maicena, azúcar y canela.", price: "$2500", type: "Cremosos", region: "Pacifica", vendor: "Vendedor 5", image: Natilla },
+    {
+      id: 1,
+      name: "Bocadillo de Guayaba",
+      description: "Bocadillo de guayaba artesanal, elaborado con fruta fresca de los Andes y un toque de canela. Su textura suave y sabor intenso te transportarán a los campos colombianos.",
+      price: "$1200",
+      type: "Horneados",
+      region: "Andina",
+      vendor: "Dulces Andinos",
+      image: BocadilloGuayaba,
+      ingredients: ["Guayaba", "Azúcar", "Canela", "Clavo"],
+      madeBy: "Dulces Andinos S.A.S."
+    },
+    {
+      id: 2,
+      name: "Arequipe Casero",
+      description: "Arequipe hecho con leche fresca de la Amazonía y azúcar de caña. Su sabor intenso y cremosidad lo convierten en el acompañante perfecto para tus postres.",
+      price: "$3000",
+      type: "Cremosos",
+      region: "Amazonica",
+      vendor: "Sabores de la Selva",
+      image: ArequipeCasero,
+      ingredients: ["Leche fresca", "Azúcar de caña", "Vainilla"],
+      madeBy: "Sabores de la Selva S.A.S."
+    },
+    {
+      id: 3,
+      name: "Dulce de Mora",
+      description: "Dulce de mora hecho con moras silvestres del Caribe y un toque de limón. Su sabor agridulce y textura jugosa te conquistarán.",
+      price: "$2100",
+      type: "Gelatinas",
+      region: "Caribe",
+      vendor: "Dulces Caribeños",
+      image: DulceMora,
+      ingredients: ["Moras", "Azúcar", "Limón", "Pectina"],
+      madeBy: "Dulces Caribeños S.A.S."
+    },
+    {
+      id: 4,
+      name: "Panelitas de Maíz",
+      description: "Deliciosas panelitas de maíz, elaboradas con maíz tierno y panela orgánica. Su sabor dulce y textura suave las hacen irresistibles.",
+      price: "$3200",
+      type: "Horneados",
+      region: "Pacifica",
+      vendor: "Dulces del Pacífico",
+      image: PanelitasMaíz,
+      ingredients: ["Maíz tierno", "Panela", "Sal"],
+      madeBy: "Dulces del Pacífico S.A.S."
+    },
+    {
+      id: 5,
+      name: "Arequipe",
+      description: "Arequipe tradicional colombiano, hecho con leche fresca y azúcar. Su sabor dulce y cremoso es perfecto para cualquier ocasión.",
+      price: "$3700",
+      type: "Cremosos",
+      region: "Insular",
+      vendor: "La Lechería",
+      image: Arequipe,
+      ingredients: ["Leche fresca", "Azúcar", "Bicarbonato de sodio"],
+      madeBy: "La Lechería S.A.S."
+    },
+    {
+      id: 6,
+      name: "Cocadas",
+      description: "Cocadas hechas con coco rallado fresco y azúcar. Su sabor dulce y textura crujiente las hacen una delicia.",
+      price: "$2200",
+      type: "Fritos",
+      region: "Orinoquia",
+      vendor: "Coco Loco",
+      image: Cocadas,
+      ingredients: ["Coco rallado", "Azúcar", "Huevo"],
+      madeBy: "Coco Loco S.A.S."
+    },
+    {
+      id: 7,
+      name: "Manjar Blanco",
+      description: "Manjar blanco artesanal, elaborado con leche fresca y azúcar. Su textura suave y sabor dulce lo convierten en un postre irresistible.",
+      price: "$2600",
+      type: "Cremosos",
+      region: "Andina",
+      vendor: "Dulces de la Abuela",
+      image: ManjarBlanco,
+      ingredients: ["Leche fresca", "Azúcar", "Canela"],
+      madeBy: "Dulces de la Abuela S.A.S."
+    },
+    {
+      id: 8,
+      name: "Panelitas",
+      description: "Panelitas hechas con panela orgánica y leche de coco. Su sabor dulce y textura suave las hacen perfectas para cualquier ocasión.",
+      price: "$1900",
+      type: "Horneados",
+      region: "Amazonica",
+      vendor: "Sabores de la Tierra",
+      image: Panelitas,
+      ingredients: ["Panela", "Leche de coco", "Vainilla"],
+      madeBy: "Sabores de la Tierra S.A.S."
+    },
+    {
+      id: 9,
+      name: "Buñuelos",
+      description: "Buñuelos tradicionales colombianos, hechos con harina, queso, huevo y sal. Su sabor salado y textura crujiente los hacen perfectos para compartir.",
+      price: "$2000",
+      type: "Fritos",
+      region: "Caribe",
+      vendor: "Sabores del Caribe",
+      image: Buñuelos,
+      ingredients: ["Harina", "Queso", "Huevo", "Sal", "Levadura"],
+      madeBy: "Sabores del Caribe S.A.S."
+    },
+    {
+      id: 10,
+      name: "Natilla",
+      description: "Natilla colombiana, hecha con leche, maicena, azúcar y canela. Su sabor dulce y textura cremosa la hacen un postre clásico.",
+      price: "$2500",
+      type: "Cremosos",
+      region: "Pacifica",
+      vendor: "La Lechería",
+      image: Natilla,
+      ingredients: ["Leche", "Maicena", "Azúcar", "Canela"],
+      madeBy: "La Lechería S.A.S."
+    }
   ];
 
   const getFilteredProducts = () => {
     return products.filter((product) => {
+      // Asegúrate de que product.name esté definido y sea una cadena
+      const productName = product.name ? product.name.toLowerCase() : "";
+  
       const matchesType = typeFilter === "" || product.type === typeFilter;
       const matchesRegion = regionFilter === "" || product.region === regionFilter;
       const matchesPrice = priceFilter === "" ||
@@ -44,14 +156,20 @@ function IndexComprador() {
           parseInt(product.price.slice(1)) >= 2100 &&
           parseInt(product.price.slice(1)) <= 4900) ||
         (priceFilter === "Más de $5100" && parseInt(product.price.slice(1)) > 5100);
-
-      const matchesVendor = vendorFilter === "" || product.vendor === vendorFilter; // Filtro de vendedores
-
-      const matchesSearchTerm = searchTerm === "" || product.name.toLowerCase().includes(searchTerm.toLowerCase());
-
+  
+      const matchesVendor = vendorFilter === "" || product.vendor === vendorFilter;
+  
+      // Maneja el caso en que searchTerm pueda ser undefined
+      const searchLower = searchTerm ? searchTerm.toLowerCase() : "";
+  
+      const matchesSearchTerm = searchLower === "" || productName.includes(searchLower);
+  
       return matchesType && matchesRegion && matchesPrice && matchesSearchTerm && matchesVendor;
     });
   };
+  
+  
+  
 
   const filteredProducts = getFilteredProducts();
 
@@ -109,43 +227,65 @@ function IndexComprador() {
               onChange={(e) => setVendorFilter(e.target.value)}
             >
               <option value="">Vendedores</option>
-              <option value="Vendedor 1">Vendedor 1</option>
-              <option value="Vendedor 2">Vendedor 2</option>
-              <option value="Vendedor 3">Vendedor 3</option>
-              <option value="Vendedor 4">Vendedor 4</option>
-              <option value="Vendedor 5">Vendedor 5</option>
+              <option value="Dulces Andinos">Dulces Andinos</option>
+              <option value="Sabores de la Selva">Sabores de la Selva</option>
+              <option value="Dulces Caribeños">Dulces Caribeños</option>
+              <option value="Dulces del Pacífico">Dulces del Pacífico</option>
+              <option value="La Lechería">La Lechería</option>
+              <option value="Coco Loco">Coco Loco</option>
             </select>
           </div>
         </div>
       </header>
+
       <div className="itemShowcaseUnique">
         {filteredProducts.length === 0 ? (
-          <h2>No hay ningun producto que cumpla con esas especificaciones</h2>
+          <h2>No hay ningún producto que cumpla con esas especificaciones</h2>
         ) : (
           filteredProducts.map((product) => (
-            <div key={product.id} className="itemCardUnique">
-              <img
-                src={product.image}
-                alt={`Producto ${product.id}`}
-                className="itemImageUnique"
-              />
-              <div className="itemDetailsUnique">
-                <h3 className="itemTitleUnique">{product.name}</h3>
-                <p className="itemDescriptionUnique">{product.description}</p>
-                <div className="itemActionsUnique">
-                  <span className="itemPriceUnique">{product.price}</span>
-                  <button
-                    onClick={() => handleAddToCart(product)}
-                    className="purchaseButtonUnique"
-                  >
-                    Añadir al Carrito
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
           ))
         )}
       </div>
+    </div>
+  );
+}
+
+function ProductCard({ product, onAddToCart }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}>
+      <img src={product.image} alt={`Producto ${product.id}`} className="itemImageUnique" />
+      <div className="itemDetailsUnique">
+        <h3 className="itemTitleUnique">{product.name}</h3>
+        <p className="itemDescriptionUnique">{product.description}</p>
+        {isExpanded && (
+          <div className="expandedInfoUnique">
+            <p><strong>Ingredientes:</strong></p>
+            <ul className="ingredientListUnique">
+              {product.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+            <p><strong>Región:</strong> {product.region}</p>
+            <p><strong>Hecho por:</strong> {product.madeBy}</p>
+            <div className="itemActionsUnique">
+              <span className="itemPriceUnique">Precio: {product.price}</span>
+              <button onClick={() => onAddToCart(product)} className="purchaseButtonUnique">
+                Añadir al Carrito
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      <button onClick={toggleExpand} className="expandButtonUnique">
+        {isExpanded ? "˄" : "˅"}
+      </button>
     </div>
   );
 }

@@ -67,54 +67,70 @@
 
 .itemCardUnique {
   position: relative;
+  background-color: white;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
   overflow: hidden;
-  border-radius: 0.375rem;
-  background-color: #ffffff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.itemCardUnique.expanded {
+  transform: scale(1.05);
 }
 
 .itemImageUnique {
   width: 100%;
   height: 12rem;
   object-fit: cover;
-  aspect-ratio: 3 / 2;
-  margin-bottom: 0;
-  /* Elimina margen inferior si hay uno por defecto */
+  aspect-ratio: 16/9;
 }
 
 .itemDetailsUnique {
-  padding: 0.75rem;
-  /* Mantén el padding reducido */
+  padding: 1rem;
+}
+
+.expandButtonUnique {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.ingredientListUnique {
+  list-style: disc inside;
+  margin: 0;
+  padding: 0.5rem 0;
 }
 
 .itemTitleUnique {
   font-size: 1.5rem;
-  font-weight: 500;
-  margin-top: 0.3rem;
-  /* Ajusta el margen */
-  margin-bottom: 0.5rem;
-  /* Ajusta el margen inferior */
-  text-align: center;
+  font-weight: 600;
 }
 
 .itemDescriptionUnique {
-  margin-top: 0.25rem;
-  /* Margen superior ajustado */
-  font-size: 0.875rem;
-  color: #a0aec0;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 32px;
+  line-height: 1.4;
 }
 
 .itemActionsUnique {
-  margin-top: 1.4rem;
-  /* Margen superior ajustado */
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  margin-top: 15px;
 }
 
-.itemPriceUnique {
-  font-size: 1.3rem;
-  font-weight: 500;
+.itemPriceUnique,
+.purchaseButtonUnique {
+  margin-top: 10px;
 }
 
 .purchaseButtonUnique {
@@ -132,6 +148,7 @@
   /* Borde visible con el color del texto */
   border-radius: 0.375rem;
   padding: 0.5rem 0.75rem;
+  margin-bottom: 32px;
   transition: background-color 0.2s;
   cursor: pointer;
 }
@@ -140,3 +157,10 @@
   background-color: #3182ce;
   color: #ffffff;
 }
+
+
+
+.expandedInfoUnique {
+  padding: 10px;
+}
+

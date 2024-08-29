@@ -72,6 +72,7 @@
     max-width: 200px;
     margin-bottom: 152px;
     filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+    cursor: pointer;
 }
 
 .menu-button {

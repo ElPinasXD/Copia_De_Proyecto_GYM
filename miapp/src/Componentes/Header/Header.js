@@ -14,7 +14,7 @@ function Header() {
 
   const handleVolverIndex = () => {
     navigate("/");
-  }
+  };
 
   const handleButtonClick = (path) => {
     navigate(path);
@@ -51,7 +51,9 @@ function Header() {
           <>
             <div className="IconoCarro" onClick={() => navigate("/CarritoCompras")}>
               <ion-icon name="cart-outline"></ion-icon>
-              {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
+              {Array.isArray(cart) && cart.length > 0 && (
+                <span className="cart-badge">{cart.length}</span>
+              )}
             </div>
             <button
               onClick={() => handleButtonClick("/Registro")}

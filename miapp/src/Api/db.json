@@ -1,0 +1,44 @@
+{
+  "compradores": [],
+  "orders": [
+    {
+      "id": "1fd4",
+      "name": "Esteban Piñeros Peña",
+      "address": "Calle 45 A sur",
+      "phoneNumber": "3196699831",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": 2,
+          "name": "Arequipe Casero",
+          "price": "3000",
+          "totalPrice": null
+        }
+      ]
+    },
+    {
+      "id": "b75a",
+      "name": "Aida",
+      "address": "Transversal 81 ",
+      "phoneNumber": "3028379495",
+      "paymentMethod": "Debito",
+      "products": [
+        {
+          "id": 2,
+          "name": "Arequipe Casero",
+          "quantity": 1,
+          "price": "3000",
+          "totalPrice": 3000
+        },
+        {
+          "id": 3,
+          "name": "Dulce de Mora",
+          "quantity": 1,
+          "price": "2100",
+          "totalPrice": 2100
+        }
+      ]
+    }
+  ],
+  "products": []
+}

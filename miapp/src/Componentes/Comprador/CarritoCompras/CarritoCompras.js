@@ -5,7 +5,7 @@ import "./CarritoCompras.css";
 
 function CarritoCompras() {
   const navigate = useNavigate();
-  const { cart, removeFromCart } = useSearch();
+  const { cart, removeFromCart, clearCart } = useSearch();
   const [quantities, setQuantities] = useState(
     cart.reduce((acc, product) => {
       acc[product.id] = 1; // Inicializamos con cantidad 1
@@ -29,8 +29,10 @@ function CarritoCompras() {
 
   const handlePurchase = () => {
     if (cart.length === 0) {
-      alert("Para hacer una compra necesitas tener un producto o mas en tu carrito de compras");
+      alert("Para hacer una compra necesitas tener un producto o más en tu carrito de compras");
     } else {
+      // Guardar el carrito en localStorage antes de redirigir
+      localStorage.setItem('cart', JSON.stringify(cart));
       navigate("/FormularioComprador");
     }
   };
@@ -87,7 +89,7 @@ function CarritoCompras() {
         )}
       </div>
       <button onClick={handlePurchase} className="purchaseButton">
-        Comprar
+        Comenzar Pago
       </button>
     </div>
   );

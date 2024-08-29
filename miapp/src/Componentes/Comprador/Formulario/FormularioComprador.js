@@ -1,49 +1,83 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Formulario.css";
 import FormularioPago from "./FormularioPago";
 import MensajeComprado from "./MensajeComprado";
+import "./Formulario.css";
 
 const FormularioComprador = () => {
-  
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [quantity] = useState(1);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [presentation, setPresentation] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const navigate = useNavigate();
 
-  
+  useEffect(() => {
+    // Obtiene el carrito del localStorage
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(storedCart);
 
-
+    // Redirige si el carrito está vacío
+    if (storedCart.length === 0) {
+      navigate("/CarritoCompras");
+    }
+  }, [navigate]);
 
   const handleVolverIndex = () => {
     navigate("/CarritoCompras");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!paymentMethod || !presentation) {
+    if (!paymentMethod || !name || !address || !phoneNumber) {
       alert("Por favor, complete todos los campos.");
       return;
     }
-    setIsPurchased(true);
+
+    const orderDetails = {
+      name,
+      address,
+      phoneNumber,
+      paymentMethod,
+      products: cart.map((product) => ({
+        id: product.id,
+        name: product.name,
+        quantity: product.quantity || 1, // Asegúrate de tener esta cantidad en el carrito
+        price: product.price.replace('$', ''), // Eliminamos el signo de dólar
+        totalPrice: parseFloat(product.price.replace('$', '')) * (product.quantity || 1)
+      })),
+    };
+
+    try {
+      const response = await fetch("http://localhost:3005/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderDetails),
+      });
+      if (response.ok) {
+        setIsPurchased(true);
+        // Limpia el carrito en localStorage después de la compra
+        localStorage.removeItem('cart');
+        // Actualiza el estado del carrito
+        setCart([]);
+      } else {
+        alert("Hubo un problema al procesar la compra.");
+      }
+    } catch (error) {
+      alert("Error de red. Inténtelo nuevamente.");
+    }
   };
 
   const handleNextStep = () => {
     if (currentStep === 1) {
-      if (!name.trim() || !address.trim()) {
+      if (!name.trim() || !address.trim() || !phoneNumber.trim()) {
         alert("Por favor, complete todos los campos.");
-        return;
-      }
-    } else if (currentStep === 2) {
-      if (quantity <= 0) {
-        alert("Por favor, seleccione una cantidad válida.");
         return;
       }
     }
@@ -135,7 +169,7 @@ const FormularioComprador = () => {
           {currentStep === 2 && (
             <div>
               <div className="form-header">
-                <h3 className="form-title">Información de la compra</h3>
+                <h3 className="form-title">Pago del pedido</h3>
               </div>
               <div className="form-body">
                 <div className="form-field">
@@ -166,20 +200,6 @@ const FormularioComprador = () => {
                 {showPaymentForm && (
                   <FormularioPago onClose={handlePaymentClose} />
                 )}
-                <div className="form-field">
-                  <label htmlFor="presentation">Presentación</label>
-                  <select
-                    id="presentation"
-                    className="form-input"
-                    value={presentation}
-                    onChange={(e) => setPresentation(e.target.value)}
-                    required
-                  >
-                    <option value="">Seleccione una opción</option>
-                    <option value="Individual">Individual</option>
-                    <option value="Paquete">Paquete</option>
-                  </select>
-                </div>
                 <div className="form-buttons">
                   <button
                     type="button"

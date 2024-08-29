@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Outlet } from 'react-router-dom';
 import './IndexVendedor.css';
-import Publicar from './Publicar/Publicar';
 import SideMenu from './Menu';
-import VerPedidos from './VerPedidos/VerPedidos';
 
 function IndexVendedor() {
-    const [showPublicar, setShowPublicar] = useState(false);
-    const [showVerPedidos, setShowVerPedidos] = useState(false); // Nuevo estado para VerPedidos
     const [showSideMenu, setShowSideMenu] = useState(false);
     const menuRef = useRef(null);
 
@@ -14,15 +11,7 @@ function IndexVendedor() {
         setShowSideMenu(!showSideMenu);
     };
 
-    const handlePublicar = () => {
-        setShowPublicar(true);
-        setShowVerPedidos(false); // Asegúrate de ocultar VerPedidos
-        setShowSideMenu(false);
-    };
-
-    const handlePedidos = () => {
-        setShowPublicar(false); // Oculta Publicar
-        setShowVerPedidos(true); // Muestra VerPedidos
+    const handleMenuClose = () => {
         setShowSideMenu(false);
     };
 
@@ -49,17 +38,16 @@ function IndexVendedor() {
                 <div></div>
                 <div></div>
             </div>
-            <h1>Bienvenido, Vendedor</h1>
             <div ref={menuRef}>
                 <SideMenu
-                    onPublicar={handlePublicar}
-                    onPedidos={handlePedidos}
-                    onClose={toggleSideMenu}
+                    onPublicar={handleMenuClose}
+                    onPedidos={handleMenuClose}
+                    onClose={handleMenuClose}
                     isOpen={showSideMenu}
                 />
             </div>
-            {showPublicar && <Publicar />}
-            {showVerPedidos && <VerPedidos />} {/* Añade esto para renderizar VerPedidos */}
+            <h1>Bienvenido, Vendedor</h1>
+            <Outlet /> {/* Renderiza el contenido basado en la ruta */}
         </div>
     );
 }

@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Componentes/Header/Header";
 import Footer from "./Componentes/Footer/Footer";
 import IndexComprador from "./Componentes/Comprador/Index/Index";
 import FormularioComprador from "./Componentes/Comprador/Formulario/FormularioComprador";
-import "./Componentes/Comprador/Formulario/Formulario.css";
 import Login from "./Componentes/Login/Login";
 import Form from "./Componentes/Registro/Form";
 import IndexVendedor from "./Componentes/Vendendor/IndexVendedor";
@@ -24,7 +18,7 @@ import CarritoCompras from "./Componentes/Comprador/CarritoCompras/CarritoCompra
 // Componente que decide si renderizar el Header y el Footer
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideHeaderFooter = ["/Login", "/Registro", "/FormularioComprador"].includes(
+  const hideHeaderFooter = ["/Login", "/Registro", "/FormularioComprador", "/IndexVendedor/Publicar", "/IndexVendedor/VerPedidos"].includes(
     location.pathname,
   );
 
@@ -47,11 +41,12 @@ function App() {
           <Route path="/CarritoCompras" element={<Layout><CarritoCompras /></Layout>} />
           <Route path="/Login" element={<Layout><Login /></Layout>} />
           <Route path="/Registro" element={<Layout><Form /></Layout>} />
-          <Route path="/IndexVendedor" element={<Layout><IndexVendedor /></Layout>} />
+          <Route path="/IndexVendedor" element={<Layout><IndexVendedor /></Layout>}>
+            <Route path="Publicar" element={<Publicar />} />
+            <Route path="VerPedidos" element={<VerPedidos />} />
+          </Route>
           <Route path="/MensajeComprado" element={<Layout><MensajeComprado /></Layout>} />
           <Route path="/FormularioPago" element={<Layout><FormularioPago /></Layout>} />
-          <Route path="/Publicar" element={<Layout><Publicar /></Layout>} />
-          <Route path="/VerPedidos" element={<Layout><VerPedidos /></Layout>} />
           <Route path="/MensajeProducto" element={<Layout><MensajeProducto /></Layout>} />
         </Routes>
       </Router>
