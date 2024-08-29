@@ -1,37 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Index/SearchContext";
 import "./CarritoCompras.css";
 
 function CarritoCompras() {
   const navigate = useNavigate();
-  const { cart, removeFromCart, clearCart } = useSearch();
-  const [quantities, setQuantities] = useState(
-    cart.reduce((acc, product) => {
-      acc[product.id] = 1; // Inicializamos con cantidad 1
+  const { cart, removeFromCart, clearCart, updateCartItemQuantity } = useSearch();
+  const [quantities, setQuantities] = useState({});
+
+  useEffect(() => {
+    // Inicializar las cantidades cuando el carrito cambia
+    const newQuantities = cart.reduce((acc, product) => {
+      acc[product.id] = product.quantity || 1;
       return acc;
-    }, {})
-  );
+    }, {});
+    setQuantities(newQuantities);
+  }, [cart]);
 
   const increment = (id) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: prevQuantities[id] + 1,
-    }));
+    setQuantities((prevQuantities) => {
+      const newQuantity = (prevQuantities[id] || 1) + 1;
+      updateCartItemQuantity(id, newQuantity);
+      return { ...prevQuantities, [id]: newQuantity };
+    });
   };
 
   const decrement = (id) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: Math.max(1, prevQuantities[id] - 1),
-    }));
+    setQuantities((prevQuantities) => {
+      const newQuantity = Math.max(1, (prevQuantities[id] || 1) - 1);
+      updateCartItemQuantity(id, newQuantity);
+      return { ...prevQuantities, [id]: newQuantity };
+    });
   };
 
   const handlePurchase = () => {
     if (cart.length === 0) {
       alert("Para hacer una compra necesitas tener un producto o más en tu carrito de compras");
     } else {
-      // Guardar el carrito en localStorage antes de redirigir
+      // Guardar el carrito actualizado en localStorage antes de redirigir
       localStorage.setItem('cart', JSON.stringify(cart));
       navigate("/FormularioComprador");
     }
@@ -50,7 +56,7 @@ function CarritoCompras() {
         ) : (
           cart.map((product) => {
             const quantity = quantities[product.id] || 1;
-            const price = parseFloat(product.price.replace('$', ''));
+            const price = parseFloat(product.price.replace('$', '')) || 0;
             const totalPrice = price * quantity;
 
             return (

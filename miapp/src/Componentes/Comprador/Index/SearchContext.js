@@ -16,7 +16,7 @@ export function SearchProvider({ children }) {
   }, [cart]);
 
   const addToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
   };
 
   const removeFromCart = (id) => {
@@ -24,11 +24,27 @@ export function SearchProvider({ children }) {
   };
 
   const clearCart = () => {
-    setCart([]); // Limpia el carrito
+    setCart([]);
+  };
+
+  const updateCartItemQuantity = (id, newQuantity) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
   };
 
   return (
-    <SearchContext.Provider value={{ searchTerm, setSearchTerm, cart, addToCart, removeFromCart, clearCart }}>
+    <SearchContext.Provider value={{ 
+      searchTerm, 
+      setSearchTerm, 
+      cart, 
+      addToCart, 
+      removeFromCart, 
+      clearCart, 
+      updateCartItemQuantity 
+    }}>
       {children}
     </SearchContext.Provider>
   );
