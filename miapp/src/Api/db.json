@@ -178,6 +178,15 @@
       "Telefono": "3028379495",
       "Usuario": "Vendedor",
       "Contraseña": "Soyesteban1029*"
+    },
+    {
+      "id": "8d70",
+      "Nombre": "Aida",
+      "Apellido": "Piñeros",
+      "Correo": "apimu11@hotmail.com",
+      "Telefono": "3028379495",
+      "Usuario": "papeleria",
+      "Contraseña": "Soyesteban102914*"
     }
   ]
 }

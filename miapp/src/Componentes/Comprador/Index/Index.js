@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Index.css"; // Importa el archivo de estilos
 import { useSearch } from "./SearchContext"; 
+import axios from "axios";
 
+// Importa las imágenes
 import ManjarBlanco from "../../../assets/images/549936eba4d64d3bfe7f905b0a2bbc1a.jpg";
 import BocadilloGuayaba from "../../../assets/images/bocadillo_de_guayaba.jpg";
 import PanelitasMaíz from "../../../assets/images/hq720.jpg";
@@ -13,12 +15,70 @@ import DulceMora from "../../../assets/images/images.jpg";
 import Panelitas from "../../../assets/images/receta-para-preparar-panelitas-de-leche-colombianas-1122984.jpg";
 import ArequipeCasero from "../../../assets/images/RV2UGXYKRREGTLRYXX5LYEXFUU.jpg";
 
+function ProductCard({ product, onAddToCart }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}>
+      <img src={product.image} alt={`Producto ${product.id}`} className="itemImageUnique" />
+      <div className="itemDetailsUnique">
+        <h3 className="itemTitleUnique">{product.name}</h3>
+        <p className="itemDescriptionUnique">{product.description}</p>
+        {isExpanded && (
+          <div className="expandedInfoUnique">
+            <p><strong>Ingredientes:</strong></p>
+            <ul className="ingredientListUnique">
+              {product.ingredients.map((ingredient, index) => (
+                <li key={index}>{ingredient}</li>
+              ))}
+            </ul>
+            <p><strong>Región:</strong> {product.region}</p>
+            <p><strong>Hecho por:</strong> {product.madeBy}</p>
+            <div className="itemActionsUnique">
+              <span className="itemPriceUnique">Precio: {product.price}</span>
+              <button onClick={() => onAddToCart(product)} className="purchaseButtonUnique">
+                Añadir al Carrito
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      <button onClick={toggleExpand} className="expandButtonUnique">
+        {isExpanded ? "˄" : "˅"}
+      </button>
+    </div>
+  );
+}
+
 function IndexComprador() {
   const { searchTerm, addToCart } = useSearch(); 
   const [typeFilter, setTypeFilter] = useState("");
   const [regionFilter, setRegionFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
-  const [vendorFilter, setVendorFilter] = useState(""); 
+  const [vendorFilter, setVendorFilter] = useState("");
+  const [vendors, setVendors] = useState([]); // Nuevo estado para los vendedores
+
+  useEffect(() => {
+    axios.get("http://localhost:3005/Vendedor")
+      .then(response => {
+        console.log("API Response:", response.data); // Verifica la estructura aquí
+        if (Array.isArray(response.data)) {
+          const vendorNames = response.data.map(v => v.Nombre); // Asegúrate de que `response.data` sea un array
+          setVendors(vendorNames);
+        } else {
+          console.error("Error: La estructura de los datos no es un array.");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching vendor data:", error);
+      });
+  }, []);
+  
+  console.log("Vendors:", vendors);
 
   const products = [
     {
@@ -145,7 +205,6 @@ function IndexComprador() {
 
   const getFilteredProducts = () => {
     return products.filter((product) => {
-      // Asegúrate de que product.name esté definido y sea una cadena
       const productName = product.name ? product.name.toLowerCase() : "";
   
       const matchesType = typeFilter === "" || product.type === typeFilter;
@@ -159,7 +218,6 @@ function IndexComprador() {
   
       const matchesVendor = vendorFilter === "" || product.vendor === vendorFilter;
   
-      // Maneja el caso en que searchTerm pueda ser undefined
       const searchLower = searchTerm ? searchTerm.toLowerCase() : "";
   
       const matchesSearchTerm = searchLower === "" || productName.includes(searchLower);
@@ -167,9 +225,6 @@ function IndexComprador() {
       return matchesType && matchesRegion && matchesPrice && matchesSearchTerm && matchesVendor;
     });
   };
-  
-  
-  
 
   const filteredProducts = getFilteredProducts();
 
@@ -227,19 +282,16 @@ function IndexComprador() {
               onChange={(e) => setVendorFilter(e.target.value)}
             >
               <option value="">Vendedores</option>
-              <option value="Dulces Andinos">Dulces Andinos</option>
-              <option value="Sabores de la Selva">Sabores de la Selva</option>
-              <option value="Dulces Caribeños">Dulces Caribeños</option>
-              <option value="Dulces del Pacífico">Dulces del Pacífico</option>
-              <option value="La Lechería">La Lechería</option>
-              <option value="Coco Loco">Coco Loco</option>
+              {vendors.map((vendor, index) => (
+                <option key={index} value={vendor}>{vendor}</option>
+              ))}
             </select>
           </div>
         </div>
       </header>
 
       <div className="itemShowcaseUnique">
-        {filteredProducts.length === 0 ? (
+      {filteredProducts.length === 0 ? (
           <h2>No hay ningún producto que cumpla con esas especificaciones</h2>
         ) : (
           filteredProducts.map((product) => (
@@ -247,45 +299,6 @@ function IndexComprador() {
           ))
         )}
       </div>
-    </div>
-  );
-}
-
-function ProductCard({ product, onAddToCart }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
-  return (
-    <div className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}>
-      <img src={product.image} alt={`Producto ${product.id}`} className="itemImageUnique" />
-      <div className="itemDetailsUnique">
-        <h3 className="itemTitleUnique">{product.name}</h3>
-        <p className="itemDescriptionUnique">{product.description}</p>
-        {isExpanded && (
-          <div className="expandedInfoUnique">
-            <p><strong>Ingredientes:</strong></p>
-            <ul className="ingredientListUnique">
-              {product.ingredients.map((ingredient, index) => (
-                <li key={index}>{ingredient}</li>
-              ))}
-            </ul>
-            <p><strong>Región:</strong> {product.region}</p>
-            <p><strong>Hecho por:</strong> {product.madeBy}</p>
-            <div className="itemActionsUnique">
-              <span className="itemPriceUnique">Precio: {product.price}</span>
-              <button onClick={() => onAddToCart(product)} className="purchaseButtonUnique">
-                Añadir al Carrito
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-      <button onClick={toggleExpand} className="expandButtonUnique">
-        {isExpanded ? "˄" : "˅"}
-      </button>
     </div>
   );
 }
