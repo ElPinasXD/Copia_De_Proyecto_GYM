@@ -256,6 +256,39 @@
       "type": "platosF",
       "quantity": "50",
       "madeBy": "estebanpineros"
+    },
+    {
+      "id": "de51",
+      "name": "Natilla",
+      "price": "1000",
+      "image": "images (4).jpg",
+      "description": "Soy un producto creado por Vendedor ",
+      "region": "amazonica",
+      "type": "otro",
+      "quantity": "10",
+      "madeBy": "Vendedor"
+    },
+    {
+      "id": "f654",
+      "name": "Guayaba",
+      "price": "3200",
+      "image": "bocadillo_de_guayaba.jpg",
+      "description": "hOLA, Soy creado por Vendedor",
+      "region": "andina",
+      "type": "gelatinas",
+      "quantity": "25",
+      "madeBy": "Vendedor"
+    },
+    {
+      "id": "d7ce",
+      "name": "Arequipe",
+      "price": "1600",
+      "image": "images (1).jpg",
+      "description": "Soy creado en papeleria y soy rica",
+      "region": "insular",
+      "type": "horneados",
+      "quantity": "22",
+      "madeBy": "papeleria"
     }
   ],
   "Vendedor": [
