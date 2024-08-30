@@ -4,37 +4,44 @@ import { useSearch } from "./SearchContext";
 import axios from "axios";
 
 function ProductCard({ product, onAddToCart }) {
-    const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-    const toggleExpand = () => {
-        setIsExpanded(!isExpanded);
-    };
+  const toggleExpand = () => {
+      setIsExpanded(!isExpanded);
+  };
 
-    return (
-        <div className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}>
-            <img src={`http://localhost:3005/images/${product.image}`} alt={`Producto ${product.id}`} className="itemImageUnique" />
-            <div className="itemDetailsUnique">
-                <h3 className="itemTitleUnique">{product.name}</h3>
-                <p className="itemDescriptionUnique">{product.description}</p>
-                <p><strong>Hecho por:</strong> {product.madeBy}</p>
-                <p><strong>Cantidad:</strong> {product.quantity}</p>
-                {isExpanded && (
-                    <div className="expandedInfoUnique">
-                        <p><strong>Región:</strong> {product.region}</p>
-                        <div className="itemActionsUnique">
-                            <span className="itemPriceUnique">Precio: {product.price}</span>
-                            <button onClick={() => onAddToCart(product)} className="purchaseButtonUnique">
-                                Añadir al Carrito
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </div>
-            <button onClick={toggleExpand} className="expandButtonUnique">
-                {isExpanded ? "˄" : "˅"}
-            </button>
-        </div>
-    );
+  return (
+      <div className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}>
+          <img src={`http://localhost:3005/images/${product.image}`} alt={`Producto ${product.id}`} className="itemImageUnique" />
+          <div className="itemDetailsUnique">
+              <h3 className="itemTitleUnique">{product.name}</h3>
+              <p className="itemDescriptionUnique">{product.description}</p>
+              <p><strong>Hecho por:</strong> {product.madeBy}</p>
+              <p>
+                <strong>Cantidad: </strong> 
+                  {product.quantity > 0 ? product.quantity : <span className="outOfStock">Agotado</span>}
+              </p>
+              {isExpanded && (
+                  <div className="expandedInfoUnique">
+                      <p><strong>Región:</strong> {product.region}</p>
+                      <div className="itemActionsUnique">
+                          <span className="itemPriceUnique">Precio: {product.price}</span>
+                          <button 
+                              onClick={() => onAddToCart(product)} 
+                              className="purchaseButtonUnique"
+                              disabled={product.quantity === 0} // Deshabilitar el botón si la cantidad es cero
+                          >
+                              Añadir al Carrito
+                          </button>
+                      </div>
+                  </div>
+              )}
+          </div>
+          <button onClick={toggleExpand} className="expandButtonUnique">
+              {isExpanded ? "˄" : "˅"}
+          </button>
+      </div>
+  );
 }
 
 function IndexComprador() {

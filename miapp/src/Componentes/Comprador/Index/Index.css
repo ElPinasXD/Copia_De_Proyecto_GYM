@@ -164,3 +164,7 @@
   padding: 10px;
 }
 
+.outOfStock {
+  color: red;
+  font-weight: bold; /* Opcional, para hacer el texto más destacado */
+}

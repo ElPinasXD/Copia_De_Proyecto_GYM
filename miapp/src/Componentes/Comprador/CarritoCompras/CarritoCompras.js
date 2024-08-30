@@ -1,44 +1,86 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../Index/SearchContext";
+import axios from "axios";
 import "./CarritoCompras.css";
 
 function CarritoCompras() {
   const navigate = useNavigate();
   const { cart, removeFromCart, clearCart, updateCartItemQuantity } = useSearch();
   const [quantities, setQuantities] = useState({});
+  const [availableQuantities, setAvailableQuantities] = useState({});
 
   useEffect(() => {
-    // Inicializar las cantidades cuando el carrito cambia
     const newQuantities = cart.reduce((acc, product) => {
       acc[product.id] = product.quantity || 1;
       return acc;
     }, {});
     setQuantities(newQuantities);
+
+    cart.forEach(product => {
+      axios.get(`http://localhost:3005/products/${product.id}`)
+        .then(response => {
+          setAvailableQuantities(prev => ({
+            ...prev,
+            [product.id]: parseInt(response.data.quantity)
+          }));
+        })
+        .catch(error => {
+          console.error("Error al obtener la cantidad del producto:", error);
+        });
+    });
   }, [cart]);
 
   const increment = (id) => {
-    setQuantities((prevQuantities) => {
-      const newQuantity = (prevQuantities[id] || 1) + 1;
+    setQuantities(prevQuantities => {
+      const currentQuantity = prevQuantities[id] || 1;
+      const maxQuantity = availableQuantities[id] || Infinity;
+      const newQuantity = Math.min(currentQuantity + 1, maxQuantity);
       updateCartItemQuantity(id, newQuantity);
       return { ...prevQuantities, [id]: newQuantity };
     });
   };
 
   const decrement = (id) => {
-    setQuantities((prevQuantities) => {
-      const newQuantity = Math.max(1, (prevQuantities[id] || 1) - 1);
+    setQuantities(prevQuantities => {
+      const currentQuantity = prevQuantities[id] || 1;
+      const newQuantity = Math.max(1, currentQuantity - 1);
       updateCartItemQuantity(id, newQuantity);
       return { ...prevQuantities, [id]: newQuantity };
     });
+  };
+
+  const handleQuantityChange = (id, value) => {
+    const newQuantity = Math.max(1, Math.min(parseInt(value) || 1, availableQuantities[id] || Infinity));
+    setQuantities(prev => ({ ...prev, [id]: newQuantity }));
+    updateCartItemQuantity(id, newQuantity);
   };
 
   const handlePurchase = () => {
     if (cart.length === 0) {
       alert("Para hacer una compra necesitas tener un producto o más en tu carrito de compras");
     } else {
-      // Guardar el carrito actualizado en localStorage antes de redirigir
-      localStorage.setItem('cart', JSON.stringify(cart));
+      cart.forEach(product => {
+        const quantity = quantities[product.id] || 1;
+        axios.get(`http://localhost:3005/products/${product.id}`)
+          .then(response => {
+            const availableQuantity = parseInt(response.data.quantity);
+            const newQuantity = availableQuantity - quantity;
+
+            axios.put(`http://localhost:3005/products/${product.id}`, { ...response.data, quantity: newQuantity })
+              .catch(error => {
+                console.error("Error al actualizar la cantidad del producto:", error);
+              });
+          })
+          .catch(error => {
+            console.error("Error al obtener la cantidad del producto:", error);
+          });
+      });
+
+      localStorage.setItem('cart', JSON.stringify(cart.map(product => ({
+        ...product,
+        quantity: quantities[product.id] || 1
+      }))));
       navigate("/FormularioComprador");
     }
   };
@@ -62,6 +104,7 @@ function CarritoCompras() {
           <>
             {cart.map((product) => {
               const quantity = quantities[product.id] || 1;
+              const maxQuantity = availableQuantities[product.id] || Infinity;
               const price = parseFloat(product.price.replace('$', '')) || 0;
               const totalPrice = price * quantity;
 
@@ -75,16 +118,26 @@ function CarritoCompras() {
                   <div className="quantity-container">
                     <div className="quantity-label">Cantidad</div>
                     <div className="quantity-controls">
-                      <button className="quantity-btn" onClick={() => decrement(product.id)}>
+                      <button 
+                        className="quantity-btn" 
+                        onClick={() => decrement(product.id)}
+                        disabled={quantity <= 1}
+                      >
                         -
                       </button>
                       <input
-                        type="text"
+                        type="number"
                         className="quantity-input"
                         value={quantity}
-                        readOnly
+                        onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                        min={1}
+                        max={maxQuantity}
                       />
-                      <button className="quantity-btn" onClick={() => increment(product.id)}>
+                      <button 
+                        className="quantity-btn" 
+                        onClick={() => increment(product.id)}
+                        disabled={quantity >= maxQuantity}
+                      >
                         +
                       </button>
                     </div>
@@ -98,12 +151,14 @@ function CarritoCompras() {
                 </div>
               );
             })}
-            
           </>
         )}
       </div>
       <button onClick={handlePurchase} className="purchaseButton">
         Comenzar Pago
+      </button>
+      <button onClick={handleClearCart} className="purchaseButton">
+        Limpiar Carrito
       </button>
     </div>
   );

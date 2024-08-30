@@ -173,6 +173,54 @@
           "totalPrice": 5200
         }
       ]
+    },
+    {
+      "id": "3d4a",
+      "name": "Esteban Piñeros Peña",
+      "address": "21312312312",
+      "phoneNumber": "1231231221",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": "d590",
+          "name": "Cafe",
+          "quantity": 1,
+          "price": "5000",
+          "totalPrice": 5000
+        }
+      ]
+    },
+    {
+      "id": "a4a5",
+      "name": "Esteban Piñeros Peña",
+      "address": "21312312312",
+      "phoneNumber": "1231231221",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": "6ad2",
+          "name": "Tinto",
+          "quantity": 2,
+          "price": "2000",
+          "totalPrice": 4000
+        }
+      ]
+    },
+    {
+      "id": "994a",
+      "name": "Aida Piñeros",
+      "address": "21312312312",
+      "phoneNumber": "2312312312",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": "d590",
+          "name": "Cafe",
+          "quantity": 9,
+          "price": "5000",
+          "totalPrice": 45000
+        }
+      ]
     }
   ],
   "products": [
@@ -184,7 +232,29 @@
       "description": "Hola mundo",
       "region": "caribe",
       "type": "galletas",
-      "quantity": "20",
+      "quantity": 18,
+      "madeBy": "estebanpineros"
+    },
+    {
+      "id": "d590",
+      "name": "Cafe",
+      "price": "5000",
+      "image": "imagen-cvcafe-10-jpg_42643383_20230621102551.jpg",
+      "description": "Hola Mundo :D",
+      "region": "amazonica",
+      "type": "platosF",
+      "quantity": 0,
+      "madeBy": "estebanpineros"
+    },
+    {
+      "id": "3707",
+      "name": "Bueñuelo",
+      "price": "1500",
+      "image": "images (3).jpg",
+      "description": "Hola, soy nuevo _::D",
+      "region": "amazonica",
+      "type": "platosF",
+      "quantity": "50",
       "madeBy": "estebanpineros"
     }
   ],
