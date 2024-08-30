@@ -10,6 +10,7 @@ function Publicar() {
         description: '',
         region: '',
         type: '',
+        quantity: '', // Nuevo campo para cantidad
     });
     const [, setErrors] = useState({});
     const [isMessageVisible, setIsMessageVisible] = useState(false);
@@ -38,6 +39,7 @@ function Publicar() {
         if (!formValues.description) newErrors.description = 'Descripción es obligatoria';
         if (!formValues.region) newErrors.region = 'Región es obligatoria';
         if (!formValues.type) newErrors.type = 'Tipo de producto es obligatorio';
+        if (!formValues.quantity) newErrors.quantity = 'Cantidad es obligatoria'; // Validar cantidad
         return newErrors;
     };
 
@@ -85,6 +87,18 @@ function Publicar() {
                         />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="quantity">Cantidad</label>
+                        <input
+                            id="quantity"
+                            type="number"
+                            placeholder="Ingrese la cantidad del producto"
+                            className="input"
+                            value={formValues.quantity}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="image">Imagen del producto</label>
                         <div className="upload-container">
                             <UploadIcon className="upload-icon" />
@@ -103,7 +117,7 @@ function Publicar() {
                         <label htmlFor="description">Descripción</label>
                         <textarea
                             id="description"
-                            placeholder="Ingrese la descripción del producto"
+                            placeholder="Ingrese la descripción del producto (Quienes son, de que esta hecho su producto, que presentacion manejan y etc...)"
                             className="textarea"
                             value={formValues.description}
                             onChange={handleChange}
