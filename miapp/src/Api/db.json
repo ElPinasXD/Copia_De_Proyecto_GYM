@@ -175,7 +175,19 @@
       ]
     }
   ],
-  "products": [],
+  "products": [
+    {
+      "id": "6ad2",
+      "name": "Tinto",
+      "price": "2000",
+      "image": "imagen-cvcafe-10-jpg_42643383_20230621102551.jpg",
+      "description": "Hola mundo",
+      "region": "caribe",
+      "type": "galletas",
+      "quantity": "20",
+      "madeBy": "estebanpineros"
+    }
+  ],
   "Vendedor": [
     {
       "id": "a478",
