@@ -244,7 +244,8 @@
       "region": "amazonica",
       "type": "platosF",
       "quantity": 0,
-      "madeBy": "estebanpineros"
+      "madeBy": "estebanpineros",
+      "disabled": true
     },
     {
       "id": "3707",
@@ -289,6 +290,39 @@
       "type": "horneados",
       "quantity": "22",
       "madeBy": "papeleria"
+    },
+    {
+      "id": "b5be",
+      "name": "Manjar",
+      "price": "5100",
+      "image": "549936eba4d64d3bfe7f905b0a2bbc1a.jpg",
+      "description": "Hola mundo",
+      "region": "orinoquia",
+      "type": "otro",
+      "quantity": "30",
+      "madeBy": "estebanpineros"
+    },
+    {
+      "id": "7e9b",
+      "name": "Dulce de mora",
+      "price": "2600",
+      "image": "images.jpg",
+      "description": "Soy dulce",
+      "region": "caribe",
+      "type": "gelatinas",
+      "quantity": "10",
+      "madeBy": "estebanpineros"
+    },
+    {
+      "id": "319d",
+      "name": "Panelitas de Maiz",
+      "price": "6500",
+      "image": "hq720.jpg",
+      "description": "Hola mundo",
+      "region": "amazonica",
+      "type": "otro",
+      "quantity": "30",
+      "madeBy": "estebanpineros"
     }
   ],
   "Vendedor": [

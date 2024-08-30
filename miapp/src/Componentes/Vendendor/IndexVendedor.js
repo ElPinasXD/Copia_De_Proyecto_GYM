@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import './IndexVendedor.css';
 import SideMenu from './Menu';
 
@@ -7,6 +8,8 @@ function IndexVendedor() {
     const [showSideMenu, setShowSideMenu] = useState(false);
     const menuRef = useRef(null);
     const [username, setUsername] = useState('Vendedor');
+    const [products, setProducts] = useState([]);
+    const location = useLocation();
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -15,12 +18,37 @@ function IndexVendedor() {
         }
     }, []);
 
+    const fetchProducts = useCallback(async () => {
+        try {
+            const response = await axios.get('http://localhost:3005/products');
+            const vendorProducts = response.data.filter(product => product.madeBy === username);
+            setProducts(vendorProducts);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }, [username]);
+
+    useEffect(() => {
+        if (location.pathname === '/IndexVendedor') {
+            fetchProducts();
+        }
+    }, [location.pathname, fetchProducts]); // Use fetchProducts here
+
     const toggleSideMenu = () => {
         setShowSideMenu(!showSideMenu);
     };
 
     const handleMenuClose = () => {
         setShowSideMenu(false);
+    };
+
+    const handleInhabilitar = async (productId) => {
+        try {
+            await axios.patch(`http://localhost:3005/products/${productId}`, { disabled: true });
+            fetchProducts(); // Refetch products after disabling
+        } catch (error) {
+            console.error('Error disabling product:', error);
+        }
     };
 
     useEffect(() => {
@@ -55,7 +83,25 @@ function IndexVendedor() {
                 />
             </div>
             <h1>Bienvenido, {username}</h1>
-            <Outlet /> {/* Renderiza el contenido basado en la ruta */}
+            
+            {location.pathname === '/IndexVendedor' && (
+                <div className="products-container">
+                    <h2>Mis productos ({products.length})</h2>
+                    <div className="products-grid">
+                        {products.map((product) => (
+                            <div key={product.id} className="product-card">
+                                <img src={product.image} alt={product.name} className="product-image" />
+                                <p className="product-name">{product.name}</p>
+                                <button onClick={() => handleInhabilitar(product.id)} className="inhabilitar-button">
+                                    Inhabilitar
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            
+            <Outlet />
         </div>
     );
 }

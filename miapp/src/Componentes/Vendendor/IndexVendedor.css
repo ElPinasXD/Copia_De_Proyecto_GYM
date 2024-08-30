@@ -139,3 +139,65 @@
     left: 300px;
     /* Mueve el ícono cuando el menú está abierto */
 }
+
+
+.products-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+}
+
+.products-container h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Crear columnas flexibles */
+    gap: 20px; /* Espacio entre los elementos de la cuadrícula */
+    max-width: 1200px; /* Limitar el ancho máximo de la cuadrícula */
+    overflow-y: auto; /* Permitir desplazamiento vertical si el contenido excede el contenedor */
+    max-height: calc(4 * 250px); /* Establecer una altura máxima para permitir solo 4 filas */
+    width: 100%; /* Asegura que la cuadrícula ocupe el ancho completo disponible */
+    justify-content: center; /* Centrar los elementos dentro de la cuadrícula */
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff; /* Asegurarse de que el fondo sea blanco */
+}
+
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-name {
+    margin: 10px 0;
+}
+
+.inhabilitar-button {
+    background-color: transparent;
+    color: #ce3131;
+    border: 2px solid #ce3131;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.inhabilitar-button:hover{
+    background-color: #ce3131;
+    color: #ffffff;
+}
