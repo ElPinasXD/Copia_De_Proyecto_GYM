@@ -142,7 +142,8 @@
       "region": "pacifica",
       "type": "cremosos",
       "quantity": "32",
-      "madeBy": "Vendedor"
+      "madeBy": "Vendedor",
+      "lastQuantity": "32"
     },
     {
       "id": "0b21",
