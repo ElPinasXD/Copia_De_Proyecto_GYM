@@ -14,11 +14,12 @@ import VerPedidos from "./Componentes/Vendendor/VerPedidos/VerPedidos";
 import MensajeProducto from "./Componentes/Vendendor/Publicar/MensajeProducto";
 import { SearchProvider } from "./Componentes/Comprador/Index/SearchContext";
 import CarritoCompras from "./Componentes/Comprador/CarritoCompras/CarritoCompras";
+import Historial from "./Componentes/Vendendor/Historial/Historial";
 
 // Componente que decide si renderizar el Header y el Footer
 const Layout = ({ children }) => {
   const location = useLocation();
-  const hideHeaderFooter = ["/Login", "/Registro", "/FormularioComprador", "/IndexVendedor/Publicar", "/IndexVendedor/VerPedidos"].includes(
+  const hideHeaderFooter = ["/Login", "/Registro", "/FormularioComprador", "/IndexVendedor/Publicar", "/IndexVendedor/VerPedidos", "/IndexVendedor/Historial"].includes(
     location.pathname,
   );
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/IndexVendedor" element={<Layout><IndexVendedor /></Layout>}>
             <Route path="Publicar" element={<Publicar />} />
             <Route path="VerPedidos" element={<VerPedidos />} />
+            <Route path="Historial" element={<Historial />} />
           </Route>
           <Route path="/MensajeComprado" element={<Layout><MensajeComprado /></Layout>} />
           <Route path="/FormularioPago" element={<Layout><FormularioPago /></Layout>} />

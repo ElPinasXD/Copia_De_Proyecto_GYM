@@ -5,6 +5,8 @@ import axios from 'axios';
 function VerPedidos() {
     const [orders, setOrders] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [orderStatus, setOrderStatus] = useState(''); // Para rastrear el estado
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -32,15 +34,29 @@ function VerPedidos() {
 
     const handleViewMore = (order) => {
         setSelectedOrder(order);
+        setIsEditModalOpen(false); // Asegura que solo un modal esté abierto a la vez
     };
 
     const handleCloseModal = () => {
         setSelectedOrder(null);
+        setIsEditModalOpen(false);
     };
 
-    const handleEditStatus = (orderId) => {
-        // Implement status editing logic here
-        console.log('Edit status for order:', orderId);
+    const handleEditStatus = (order) => {
+        setSelectedOrder(order);
+        setOrderStatus(order.status); // Establece el estado inicial desde el pedido
+        setIsEditModalOpen(true); // Abre el modal de Editar Estado
+    };
+
+    const handleStatusChange = (event) => {
+        setOrderStatus(event.target.value);
+    };
+
+    const handleSaveStatus = () => {
+        // Aquí enviarías el estado actualizado a tu servidor
+        console.log('Guardando estado:', orderStatus);
+        // Cierra el modal después de guardar
+        setIsEditModalOpen(false);
     };
 
     return (
@@ -58,13 +74,13 @@ function VerPedidos() {
                             <button onClick={() => handleViewMore(order)} className="viewMoreButton">Ver Más</button>
                         </div>
                         <div className="orderColumn buttonColumn">
-                            <button onClick={() => handleEditStatus(order.id)} className="editStatusButton">Editar Estado</button>
+                            <button onClick={() => handleEditStatus(order)} className="editStatusButton">Editar Estado</button>
                         </div>
                     </div>
                 ))}
             </div>
 
-            {selectedOrder && (
+            {selectedOrder && !isEditModalOpen && (
                 <div className="modalOverlay">
                     <div className="modalContent">
                         <button className="closeModalButton" onClick={handleCloseModal}>X</button>
@@ -81,6 +97,25 @@ function VerPedidos() {
                                 <p>Total: ${product.totalPrice}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+            )}
+
+            {isEditModalOpen && (
+                <div className="modalOverlay">
+                    <div className="modalContent">
+                        <button className="closeModalButton" onClick={handleCloseModal}>X</button>
+                        <h3 className="modalTitle">Estado del Pedido</h3>
+                        <label> 
+                            <select value={orderStatus} onChange={handleStatusChange} className="styledSelect">
+                                <option value="inicio">Seleccione el estado</option>
+                                <option value="Entregado">Entregado</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </label>
+                        <div>
+                            <button onClick={handleSaveStatus} className="saveButton">Guardar</button>
+                        </div>
                     </div>
                 </div>
             )}

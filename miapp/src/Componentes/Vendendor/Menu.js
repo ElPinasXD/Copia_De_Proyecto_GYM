@@ -26,12 +26,17 @@ function SideMenu({ onPublicar, onPedidos, onClose, isOpen }) {
         onClose(); // Cierra el menú
     };
 
+    const handleHistorial = () => {
+        navigate('/IndexVendedor/Historial')
+        onClose();
+    }
+
     return (
         <div className={`side-menu ${isOpen ? 'open' : ''}`}>
             <img src={Logo} onClick={handleIndexVendedor} alt="Logo" className="side-menu-logo" />
             <button onClick={handlePublicar} className="menu-button">Publicar</button>
             <button onClick={handlePedidos} className="menu-button">Pedidos</button>
-            <button className="menu-button">Historial</button>
+            <button onClick={handleHistorial} className="menu-button">Historial</button>
             <button onClick={handleCerrarSesion} className="cerrar-sesion">Cerrar Sesión</button>
         </div>
     );

@@ -48,6 +48,54 @@
           "totalPrice": 84000
         }
       ]
+    },
+    {
+      "id": "40b4",
+      "name": "David Becerra",
+      "address": "Cl. 75 #85-0, Bogotá",
+      "phoneNumber": "3184848715",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": "b57b",
+          "name": "Tinto",
+          "quantity": 5,
+          "price": "2000",
+          "totalPrice": 10000
+        }
+      ]
+    },
+    {
+      "id": "634d",
+      "name": "Daniel ",
+      "address": "Cra. 89A #75a-37 a 75a-1",
+      "phoneNumber": "3184548846",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": "efde",
+          "name": "Guayaba",
+          "quantity": 15,
+          "price": "3000",
+          "totalPrice": 45000
+        }
+      ]
+    },
+    {
+      "id": "643f",
+      "name": "Narly",
+      "address": "Cra. 72a #70-73, Bogotá",
+      "phoneNumber": "3189875446",
+      "paymentMethod": "Efectivo",
+      "products": [
+        {
+          "id": "1cd4",
+          "name": "Bueñuelo",
+          "quantity": 5,
+          "price": "4200",
+          "totalPrice": 21000
+        }
+      ]
     }
   ],
   "products": [
@@ -59,7 +107,7 @@
       "description": "Hola mundo",
       "region": "andina",
       "type": "horneados",
-      "quantity": "10",
+      "quantity": 5,
       "madeBy": "estebanpineros"
     },
     {
@@ -81,7 +129,7 @@
       "description": "Hola mundo",
       "region": "caribe",
       "type": "gelatinas",
-      "quantity": 42,
+      "quantity": 27,
       "madeBy": "Vendedor"
     },
     {
@@ -114,7 +162,7 @@
       "description": "Soy rico",
       "region": "orinoquia",
       "type": "platosF",
-      "quantity": 5,
+      "quantity": 0,
       "madeBy": "papeleria"
     }
   ],
