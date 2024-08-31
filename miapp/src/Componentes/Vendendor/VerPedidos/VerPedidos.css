@@ -109,6 +109,7 @@
     z-index: 1000;
 }
 
+/*
 .modalContent {
     background-color: #fff;
     padding: 20px;
@@ -118,6 +119,7 @@
     position: relative;
     z-index: 1001;
 }
+*/
 
 .closeModalButton {
     position: absolute;
@@ -174,7 +176,7 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
-    width: 90%;
+    width: 80%;
     margin: 8px;
 }
 
@@ -186,7 +188,7 @@
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
     padding: 8px 16px;
-    margin-top: 16px;
+    margin: 10px 0 13px 0;
 }
 
 .saveButton:hover {
@@ -200,7 +202,7 @@
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
-    width: 90%;
+    width: 25%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 

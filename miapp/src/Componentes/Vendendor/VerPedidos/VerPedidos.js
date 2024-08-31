@@ -88,13 +88,11 @@ function VerPedidos() {
                         <p><strong>Dirección:</strong> {selectedOrder.address}</p>
                         <p><strong>Teléfono:</strong> {selectedOrder.phoneNumber}</p>
                         <p><strong>Método de pago:</strong> {selectedOrder.paymentMethod}</p>
-                        <h4>Productos:</h4>
                         {selectedOrder.products.map(product => (
                             <div key={product.id}>
-                                <p><strong>{product.name}</strong></p>
-                                <p>Cantidad: {product.quantity}</p>
-                                <p>Precio: ${product.price}</p>
-                                <p>Total: ${product.totalPrice}</p>
+                                <p><strong>Producto: </strong> {product.name}</p>
+                                <p><strong>Cantidad: </strong>{product.quantity}</p>
+                                <p><strong>Total: </strong> ${product.totalPrice}</p>
                             </div>
                         ))}
                     </div>
@@ -110,6 +108,7 @@ function VerPedidos() {
                             <select value={orderStatus} onChange={handleStatusChange} className="styledSelect">
                                 <option value="inicio">Seleccione el estado</option>
                                 <option value="Entregado">Entregado</option>
+                                <option value="Proceso">En proceso</option>
                                 <option value="Cancelado">Cancelado</option>
                             </select>
                         </label>
