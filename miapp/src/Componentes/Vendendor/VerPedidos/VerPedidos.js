@@ -6,7 +6,7 @@ function VerPedidos() {
     const [orders, setOrders] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [orderStatus, setOrderStatus] = useState(''); // Para rastrear el estado
+    const [orderStatus, setOrderStatus] = useState('');
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -23,7 +23,7 @@ function VerPedidos() {
             const filteredOrders = ordersResponse.data.filter(order => 
                 order.products.some(product => 
                     productsResponse.data.find(p => p.id === product.id && p.madeBy === vendorUsername)
-                )
+                ) && order.status !== 'Entregado' // Filtrar pedidos que no estén entregados
             );
             
             setOrders(filteredOrders);
@@ -34,7 +34,7 @@ function VerPedidos() {
 
     const handleViewMore = (order) => {
         setSelectedOrder(order);
-        setIsEditModalOpen(false); // Asegura que solo un modal esté abierto a la vez
+        setIsEditModalOpen(false);
     };
 
     const handleCloseModal = () => {
@@ -44,19 +44,27 @@ function VerPedidos() {
 
     const handleEditStatus = (order) => {
         setSelectedOrder(order);
-        setOrderStatus(order.status); // Establece el estado inicial desde el pedido
-        setIsEditModalOpen(true); // Abre el modal de Editar Estado
+        setOrderStatus(order.status);
+        setIsEditModalOpen(true);
     };
 
     const handleStatusChange = (event) => {
         setOrderStatus(event.target.value);
     };
 
-    const handleSaveStatus = () => {
-        // Aquí enviarías el estado actualizado a tu servidor
-        console.log('Guardando estado:', orderStatus);
-        // Cierra el modal después de guardar
-        setIsEditModalOpen(false);
+    const handleSaveStatus = async () => {
+        try {
+            await axios.patch(`http://localhost:3005/orders/${selectedOrder.id}`, { status: orderStatus });
+            setOrders(orders.map(order => 
+                order.id === selectedOrder.id ? {...order, status: orderStatus} : order
+            ));
+            if (orderStatus === 'Entregado') {
+                setOrders(orders.filter(order => order.id !== selectedOrder.id));
+            }
+            setIsEditModalOpen(false);
+        } catch (error) {
+            console.error('Error updating order status:', error);
+        }
     };
 
     return (

@@ -63,7 +63,8 @@
           "price": "2000",
           "totalPrice": 10000
         }
-      ]
+      ],
+      "status": "Entregado"
     },
     {
       "id": "634d",
