@@ -154,11 +154,11 @@ function CarritoCompras() {
           </>
         )}
       </div>
-      <button onClick={handlePurchase} className="purchaseButton">
-        Comenzar Pago
-      </button>
       <button onClick={handleClearCart} className="purchaseButton">
         Limpiar Carrito
+      </button>
+      <button onClick={handlePurchase} className="purchaseButton">
+        Comenzar Pago
       </button>
     </div>
   );

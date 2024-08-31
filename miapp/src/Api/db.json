@@ -2,327 +2,120 @@
   "compradores": [],
   "orders": [
     {
-      "id": "1fd4",
+      "id": "b843",
       "name": "Esteban Piñeros Peña",
-      "address": "Calle 45 A sur",
-      "phoneNumber": "3196699831",
+      "address": "Calle 45 Sur",
+      "phoneNumber": "3096699831",
       "paymentMethod": "Efectivo",
       "products": [
         {
-          "id": 2,
-          "name": "Arequipe Casero",
-          "price": "3000",
-          "totalPrice": null
-        }
-      ]
-    },
-    {
-      "id": "b75a",
-      "name": "Aida",
-      "address": "Transversal 81 ",
-      "phoneNumber": "3028379495",
-      "paymentMethod": "Debito",
-      "products": [
-        {
-          "id": 2,
-          "name": "Arequipe Casero",
-          "quantity": 1,
-          "price": "3000",
-          "totalPrice": 3000
-        },
-        {
-          "id": 3,
-          "name": "Dulce de Mora",
-          "quantity": 1,
-          "price": "2100",
-          "totalPrice": 2100
-        }
-      ]
-    },
-    {
-      "id": "74ec",
-      "name": "Andrea Piñeros",
-      "address": "Calle 40 # 80 K ",
-      "phoneNumber": "3196699831",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 5,
-          "name": "Arequipe",
-          "quantity": 1,
-          "price": "3700",
-          "totalPrice": 3700
-        },
-        {
-          "id": 9,
-          "name": "Buñuelos",
-          "quantity": 1,
-          "price": "2000",
-          "totalPrice": 2000
-        }
-      ]
-    },
-    {
-      "id": "cb1c",
-      "name": "hola",
-      "address": "calle 23",
-      "phoneNumber": "2312312312",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 6,
-          "name": "Cocadas",
-          "quantity": 1,
-          "price": "2200",
-          "totalPrice": 2200
-        }
-      ]
-    },
-    {
-      "id": "904b",
-      "name": "Andrea Paredes",
-      "address": "Transversal 81 # 80-71",
-      "phoneNumber": "3196699831",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 8,
-          "name": "Panelitas",
-          "quantity": 5,
-          "price": "1900",
-          "totalPrice": 9500
-        }
-      ]
-    },
-    {
-      "id": "e9fd",
-      "name": "Este",
-      "address": "calle 45",
-      "phoneNumber": "3154518484",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 2,
-          "name": "Arequipe Casero",
-          "quantity": 1,
-          "price": "3000",
-          "totalPrice": 3000
-        }
-      ]
-    },
-    {
-      "id": "61a1",
-      "name": "Esteban Piñeros Peña",
-      "address": "21312312312",
-      "phoneNumber": "3184878754",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 10,
-          "name": "Natilla",
-          "quantity": 3,
-          "price": "2500",
-          "totalPrice": 7500
-        }
-      ]
-    },
-    {
-      "id": "1eac",
-      "name": "awdaw",
-      "address": "21312312312",
-      "phoneNumber": "2131231231",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 3,
-          "name": "Dulce de Mora",
-          "quantity": 2,
-          "price": "2100",
-          "totalPrice": 4200
-        }
-      ]
-    },
-    {
-      "id": "0129",
-      "name": "David",
-      "address": "calle 70 NQS 30 sur",
-      "phoneNumber": "3133749955",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": 3,
-          "name": "Dulce de Mora",
+          "id": "2e3a",
+          "name": "Cafe",
           "quantity": 10,
-          "price": "2100",
-          "totalPrice": 21000
+          "price": "3000",
+          "totalPrice": 30000
         }
       ]
     },
     {
-      "id": "11bd",
-      "name": "Esteban Piñeros Peña",
-      "address": "21312312312",
-      "phoneNumber": "1231231221",
+      "id": "25aa",
+      "name": "Aida Piñeros",
+      "address": "Tranversal 81 ",
+      "phoneNumber": "3133749955",
       "paymentMethod": "Debito",
       "products": [
         {
-          "id": 7,
-          "name": "Manjar Blanco",
-          "quantity": 2,
-          "price": "2600",
-          "totalPrice": 5200
+          "id": "efde",
+          "name": "Guayaba",
+          "quantity": 8,
+          "price": "3000",
+          "totalPrice": 24000
         }
       ]
     },
     {
-      "id": "3d4a",
-      "name": "Esteban Piñeros Peña",
-      "address": "21312312312",
-      "phoneNumber": "1231231221",
-      "paymentMethod": "Efectivo",
+      "id": "7862",
+      "name": "Andrea Paredes",
+      "address": "Calle 52 con caracas",
+      "phoneNumber": "3028379495",
+      "paymentMethod": "Credito",
       "products": [
         {
-          "id": "d590",
-          "name": "Cafe",
-          "quantity": 1,
-          "price": "5000",
-          "totalPrice": 5000
-        }
-      ]
-    },
-    {
-      "id": "a4a5",
-      "name": "Esteban Piñeros Peña",
-      "address": "21312312312",
-      "phoneNumber": "1231231221",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": "6ad2",
-          "name": "Tinto",
-          "quantity": 2,
-          "price": "2000",
-          "totalPrice": 4000
-        }
-      ]
-    },
-    {
-      "id": "994a",
-      "name": "Aida Piñeros",
-      "address": "21312312312",
-      "phoneNumber": "2312312312",
-      "paymentMethod": "Efectivo",
-      "products": [
-        {
-          "id": "d590",
-          "name": "Cafe",
-          "quantity": 9,
-          "price": "5000",
-          "totalPrice": 45000
+          "id": "1cd4",
+          "name": "Bueñuelo",
+          "quantity": 20,
+          "price": "4200",
+          "totalPrice": 84000
         }
       ]
     }
   ],
   "products": [
     {
-      "id": "6ad2",
+      "id": "b57b",
       "name": "Tinto",
       "price": "2000",
-      "image": "imagen-cvcafe-10-jpg_42643383_20230621102551.jpg",
+      "image": "RV2UGXYKRREGTLRYXX5LYEXFUU.jpg",
       "description": "Hola mundo",
-      "region": "caribe",
-      "type": "galletas",
-      "quantity": 18,
-      "madeBy": "estebanpineros"
-    },
-    {
-      "id": "d590",
-      "name": "Cafe",
-      "price": "5000",
-      "image": "imagen-cvcafe-10-jpg_42643383_20230621102551.jpg",
-      "description": "Hola Mundo :D",
-      "region": "amazonica",
-      "type": "platosF",
-      "quantity": 0,
-      "madeBy": "estebanpineros",
-      "disabled": true
-    },
-    {
-      "id": "3707",
-      "name": "Bueñuelo",
-      "price": "1500",
-      "image": "images (3).jpg",
-      "description": "Hola, soy nuevo _::D",
-      "region": "amazonica",
-      "type": "platosF",
-      "quantity": "50",
-      "madeBy": "estebanpineros"
-    },
-    {
-      "id": "de51",
-      "name": "Natilla",
-      "price": "1000",
-      "image": "images (4).jpg",
-      "description": "Soy un producto creado por Vendedor ",
-      "region": "amazonica",
-      "type": "otro",
-      "quantity": "10",
-      "madeBy": "Vendedor"
-    },
-    {
-      "id": "f654",
-      "name": "Guayaba",
-      "price": "3200",
-      "image": "bocadillo_de_guayaba.jpg",
-      "description": "hOLA, Soy creado por Vendedor",
       "region": "andina",
-      "type": "gelatinas",
-      "quantity": "25",
-      "madeBy": "Vendedor"
-    },
-    {
-      "id": "d7ce",
-      "name": "Arequipe",
-      "price": "1600",
-      "image": "images (1).jpg",
-      "description": "Soy creado en papeleria y soy rica",
-      "region": "insular",
       "type": "horneados",
-      "quantity": "22",
-      "madeBy": "papeleria"
-    },
-    {
-      "id": "b5be",
-      "name": "Manjar",
-      "price": "5100",
-      "image": "549936eba4d64d3bfe7f905b0a2bbc1a.jpg",
-      "description": "Hola mundo",
-      "region": "orinoquia",
-      "type": "otro",
-      "quantity": "30",
-      "madeBy": "estebanpineros"
-    },
-    {
-      "id": "7e9b",
-      "name": "Dulce de mora",
-      "price": "2600",
-      "image": "images.jpg",
-      "description": "Soy dulce",
-      "region": "caribe",
-      "type": "gelatinas",
       "quantity": "10",
       "madeBy": "estebanpineros"
     },
     {
-      "id": "319d",
-      "name": "Panelitas de Maiz",
-      "price": "6500",
-      "image": "hq720.jpg",
+      "id": "2e3a",
+      "name": "Cafe",
+      "price": "3000",
+      "image": "bocadillo_de_guayaba.jpg",
       "description": "Hola mundo",
       "region": "amazonica",
-      "type": "otro",
-      "quantity": "30",
+      "type": "fritos",
+      "quantity": 10,
       "madeBy": "estebanpineros"
+    },
+    {
+      "id": "efde",
+      "name": "Guayaba",
+      "price": "3000",
+      "image": "bocadillo_de_guayaba.jpg",
+      "description": "Hola mundo",
+      "region": "caribe",
+      "type": "gelatinas",
+      "quantity": 42,
+      "madeBy": "Vendedor"
+    },
+    {
+      "id": "51ec",
+      "name": "Arequipe",
+      "price": "2600",
+      "image": "images (1).jpg",
+      "description": "Soyesteban",
+      "region": "pacifica",
+      "type": "cremosos",
+      "quantity": "32",
+      "madeBy": "Vendedor"
+    },
+    {
+      "id": "0b21",
+      "name": "Dulce de mora",
+      "price": "5600",
+      "image": "images.jpg",
+      "description": "Hola mundo soy nuevo",
+      "region": "insular",
+      "type": "galletas",
+      "quantity": "10",
+      "madeBy": "Vendedor"
+    },
+    {
+      "id": "1cd4",
+      "name": "Bueñuelo",
+      "price": "4200",
+      "image": "images (3).jpg",
+      "description": "Soy rico",
+      "region": "orinoquia",
+      "type": "platosF",
+      "quantity": 5,
+      "madeBy": "papeleria"
     }
   ],
   "Vendedor": [
