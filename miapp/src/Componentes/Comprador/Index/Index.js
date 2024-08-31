@@ -59,14 +59,24 @@ function IndexComprador() {
 
   // Cargar productos desde la API
   useEffect(() => {
-    axios.get("http://localhost:3005/products")
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error("Error al obtener los productos:", error);
-      });
-  }, []);
+    const fetchProducts = () => {
+        axios.get("http://localhost:3005/products")
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(error => {
+                console.error("Error al obtener los productos:", error);
+            });
+    };
+
+    fetchProducts(); // Cargar productos inicialmente
+
+    // Actualizar productos cada 30 segundos
+    const intervalId = setInterval(fetchProducts, 30000);
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => clearInterval(intervalId);
+}, []);
 
   // Cargar nombres de vendedores desde la API
   useEffect(() => {

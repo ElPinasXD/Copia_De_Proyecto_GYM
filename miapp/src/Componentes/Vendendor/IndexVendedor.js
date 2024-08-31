@@ -44,13 +44,13 @@ function IndexVendedor() {
 
     const handleInhabilitar = async (productId) => {
         try {
-            await axios.patch(`http://localhost:3005/products/${productId}`, { disabled: true });
+            // Actualizar el producto a cantidad 0
+            await axios.patch(`http://localhost:3005/products/${productId}`, { quantity: 0 });
             fetchProducts(); // Refetch products after disabling
         } catch (error) {
             console.error('Error disabling product:', error);
         }
     };
-
     useEffect(() => {
         function handleClickOutside(event) {
             if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.classList.contains('menu-icon')) {
