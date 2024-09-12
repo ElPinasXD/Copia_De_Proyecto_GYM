@@ -7,15 +7,16 @@ function Publicar() {
     const [formValues, setFormValues] = useState({
         name: '',
         price: '',
-        image: null,
+        image: '', // Cambiado a string
         description: '',
         region: '',
         type: '',
-        quantity: '', // Campo de cantidad
+        quantity: '',
     });
     const [, setErrors] = useState({});
     const [isMessageVisible, setIsMessageVisible] = useState(false);
     const [username, setUsername] = useState('');
+    const [imagePreview, setImagePreview] = useState(''); // Estado para la vista previa de la imagen
 
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
@@ -25,11 +26,18 @@ function Publicar() {
     }, []);
 
     const handleChange = (e) => {
-        const { id, value, type, files } = e.target;
+        const { id, value } = e.target;
         setFormValues((prevValues) => ({
             ...prevValues,
-            [id]: type === 'file' ? files[0] : value,
+            [id]: value,
         }));
+    };
+
+    const handleSearchImage = () => {
+        const { image } = formValues;
+        if (image) {
+            setImagePreview(image); // Actualiza la vista previa con el enlace de la imagen
+        }
     };
 
     const validateForm = () => {
@@ -51,14 +59,14 @@ function Publicar() {
             const productData = {
                 name: formValues.name,
                 price: formValues.price,
-                image: formValues.image.name, // Solo se almacena el nombre del archivo
+                image: formValues.image,
                 description: formValues.description,
                 region: formValues.region,
                 type: formValues.type,
                 quantity: formValues.quantity,
                 madeBy: username,
             };
-    
+
             axios.post('http://localhost:3005/products', productData)
                 .then(response => {
                     console.log('Producto creado:', response.data);
@@ -116,7 +124,7 @@ function Publicar() {
                                 required
                             />
                         </div>
-                        <div className="form-group">
+                        {/*<div className="form-group">
                             <label htmlFor="image">Imagen del producto</label>
                             <div className="upload-container">
                                 <UploadIcon className="upload-icon" />
@@ -130,7 +138,33 @@ function Publicar() {
                                     required
                                 />
                             </div>
+                        </div>*/}
+                        <div className="form-group">
+                            <label htmlFor="image">Imagen del producto (URL)</label>
+                            <div className="image-input-container">
+                                <input
+                                    id="image"
+                                    type="text"
+                                    placeholder="Ingrese la URL de la imagen"
+                                    className="input image-input"
+                                    value={formValues.image}
+                                    onChange={handleChange}
+                                />
+                                <button
+                                    type="button"
+                                    onClick={handleSearchImage}
+                                    disabled={!formValues.image}
+                                    className="search-button-publicar"
+                                >
+                                    Buscar
+                                </button>
+                            </div>
                         </div>
+                        {imagePreview && (
+                            <div className="image-preview">
+                                <img src={imagePreview} alt="Vista previa" className="preview-image" />
+                            </div>
+                        )}
                         <div className="form-group">
                             <label htmlFor="description">Descripción</label>
                             <textarea
@@ -152,13 +186,13 @@ function Publicar() {
                                 required
                             >
                                 <option value="" disabled>Seleccione la región</option>
-                                <option value="andina">Andina</option>
-                                <option value="amazonica">Amazónica</option>
-                                <option value="caribe">Caribe</option>
-                                <option value="pacifica">Pacífica</option>
-                                <option value="insular">Insular</option>
-                                <option value="orinoquia">Orinoquia</option>
-                                <option value="otra">Otra</option>
+                                <option value="Andina">Andina</option>
+                                <option value="Amazonica">Amazónica</option>
+                                <option value="Caribe">Caribe</option>
+                                <option value="Pacifica">Pacífica</option>
+                                <option value="Insular">Insular</option>
+                                <option value="Orinoquia">Orinoquia</option>
+                                <option value="Otra">Otra</option>
                             </select>
                         </div>
                         <div className="form-group">
@@ -171,13 +205,13 @@ function Publicar() {
                                 required
                             >
                                 <option value="" disabled>Seleccione el tipo</option>
-                                <option value="horneados">Horneados</option>
-                                <option value="fritos">Fritos</option>
-                                <option value="gelatinas">Gelatinas</option>
-                                <option value="cremosos">Cremosos</option>
-                                <option value="galletas">Galletas</option>
-                                <option value="platosF">Platos Fríos</option>
-                                <option value="otro">Otro</option>
+                                <option value="Horneados">Horneados</option>
+                                <option value="Fritos">Fritos</option>
+                                <option value="Gelatinas">Gelatinas</option>
+                                <option value="Cremosos">Cremosos</option>
+                                <option value="Galletas">Galletas</option>
+                                <option value="PlatosF">Platos Fríos</option>
+                                <option value="Otro">Otro</option>
                             </select>
                         </div>
                         <button type="submit" className="submit-button">Publicar</button>
@@ -188,6 +222,9 @@ function Publicar() {
     );
 }
 
+export default Publicar;
+
+/*
 function UploadIcon(props) {
     return (
         <svg
@@ -207,6 +244,5 @@ function UploadIcon(props) {
             <line x1="12" x2="12" y1="3" y2="15" />
         </svg>
     );
-}
+} */
 
-export default Publicar;

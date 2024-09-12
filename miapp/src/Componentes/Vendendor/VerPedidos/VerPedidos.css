@@ -2,52 +2,46 @@
     padding: 20px;
     position: relative;
     display: flex;
-    justify-content: center; /* Center the card horizontally */
+    justify-content: center;
 }
 
 .ordersTable {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0 auto; /* Ensure the table is centered */
+    margin: 0 auto;
 }
 
 .orderRow {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping to keep columns aligned */
+    flex-wrap: nowrap; /* Previene el wrapping */
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
     border: 2px solid #a6a6a6;
     border-radius: 8px;
-    padding: 10px;
-    margin: 0 auto; /* Center the row */
+    margin: 0 auto;
     width: 80%;
     margin-bottom: 50px;
 }
 
 .orderColumn {
     flex: 1;
-    min-width: 150px; /* Adjusted for better spacing */
-    padding: 10px; /* Increased padding for equal spacing */
+    min-width: 150px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.imageColumn {
-    flex: 0 0 250px; /* Adjusted to enlarge the image container */
-}
-
-.orderImage {
-    width: 150px; /* Enlarged image */
-    height: 130px; /* Enlarged image */
+.orderImagePedidos {
+    width: 200px;
+    height: auto;
     object-fit: cover;
-    border-radius: 6px;
 }
 
 .nameColumn {
-    flex: 1; /* Adjusted for better distribution */
+    flex: 1;
 }
 
 .clientName {
@@ -56,7 +50,7 @@
 }
 
 .buttonColumn {
-    flex: 1; /* Adjusted for equal spacing with other columns */
+    flex: 1;
 }
 
 .viewMoreButton, .editStatusButton {
@@ -94,6 +88,47 @@
     background-color: #3182ce;
     color: #ffffff;
 }
+
+/* Media Queries para dispositivos pequeños */
+@media (max-width: 768px) {
+    .orderRow {
+        flex-wrap: wrap; /* Permite que las columnas se acomoden verticalmente */
+        width: 100%; /* Ajuste completo a pantalla */
+    }
+
+    .orderColumn {
+        flex: 1 1 100%; /* Las columnas ocupan el 100% del ancho */
+        padding: 5px; /* Reducir padding para pantallas pequeñas */
+    }
+
+    .orderImagePedidos {
+        width: 100px; /* Reducción del tamaño de la imagen */
+    }
+
+    .clientName {
+        font-size: 1em; /* Tamaño de fuente más pequeño */
+    }
+
+    .viewMoreButton, .editStatusButton {
+        max-width: 100px; /* Botones más pequeños */
+    }
+}
+
+@media (max-width: 480px) {
+    .orderImagePedidos {
+        width: 80px; /* Imagen más pequeña para pantallas muy pequeñas */
+    }
+
+    .viewMoreButton, .editStatusButton {
+        font-size: 0.8em; /* Botones más pequeños */
+        max-width: 80px; /* Ajuste de tamaño */
+    }
+
+    .clientName {
+        font-size: 0.9em; /* Reducción adicional del tamaño de texto */
+    }
+}
+
 
 /* Modal styles remain the same */
 .modalOverlay {

@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './VerPedidos.css';
 import axios from 'axios';
 
 function VerPedidos() {
     const [orders, setOrders] = useState([]);
+    const [productsMap, setProductsMap] = useState({}); // Mapa de productos
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [orderStatus, setOrderStatus] = useState('');
 
-    useEffect(() => {
-        const storedUsername = localStorage.getItem('username');
-        if (storedUsername) {
-            fetchOrders(storedUsername);
-        }
-    }, []);
-
-    const fetchOrders = async (vendorUsername) => {
+    // Función para obtener órdenes
+    const fetchOrders = useCallback(async (vendorUsername) => {
         try {
             const ordersResponse = await axios.get('http://localhost:3005/orders');
-            const productsResponse = await axios.get('http://localhost:3005/products');
             
             const filteredOrders = ordersResponse.data.filter(order => 
                 order.products.some(product => 
-                    productsResponse.data.find(p => p.id === product.id && p.madeBy === vendorUsername)
+                    productsMap[product.name] && productsMap[product.name].madeBy === vendorUsername
                 ) && order.status !== 'Entregado' // Filtrar pedidos que no estén entregados
             );
             
@@ -30,6 +24,39 @@ function VerPedidos() {
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
+    }, [productsMap]);
+
+    // Función para obtener productos
+    const fetchProducts = useCallback(async () => {
+        try {
+            const productsResponse = await axios.get('http://localhost:3005/products');
+            const productsArray = productsResponse.data;
+
+            // Crear un mapa de productos por nombre
+            const productsMap = productsArray.reduce((map, product) => {
+                map[product.name] = product;
+                return map;
+            }, {});
+
+            setProductsMap(productsMap);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }, []);
+
+    // Usar useEffect para cargar datos
+    useEffect(() => {
+        const storedUsername = localStorage.getItem('username');
+        if (storedUsername) {
+            fetchOrders(storedUsername);
+            fetchProducts();
+        }
+    }, [fetchOrders, fetchProducts]);
+
+    // Obtener URL de la imagen del producto
+    const getProductImageUrl = (productName) => {
+        const product = productsMap[productName];
+        return product ? product.image : '';
     };
 
     const handleViewMore = (order) => {
@@ -54,14 +81,34 @@ function VerPedidos() {
 
     const handleSaveStatus = async () => {
         try {
-            await axios.patch(`http://localhost:3005/orders/${selectedOrder.id}`, { status: orderStatus });
-            setOrders(orders.map(order => 
-                order.id === selectedOrder.id ? {...order, status: orderStatus} : order
-            ));
-            if (orderStatus === 'Entregado') {
+            if (orderStatus === 'Cancelado') {
+                // Si el estado es 'Cancelado', eliminamos la orden del servidor
+                await axios.delete(`http://localhost:3005/orders/${selectedOrder.id}`);
+                // Eliminamos la orden de la lista local
                 setOrders(orders.filter(order => order.id !== selectedOrder.id));
+            } else {
+                // Para otros estados, actualizamos la orden
+                const updatedOrder = {
+                    ...selectedOrder,
+                    status: orderStatus,
+                };
+                
+                if (orderStatus === 'Entregado') {
+                    // Si el estado es 'Entregado', actualizamos la fecha de entrega
+                    updatedOrder.deliveryDate = new Date().toISOString();
+                }
+                
+                await axios.put(`http://localhost:3005/orders/${selectedOrder.id}`, updatedOrder);
+                
+                // Actualizamos la lista local de órdenes
+                setOrders(orders.map(order => 
+                    order.id === selectedOrder.id ? updatedOrder : order
+                ));
             }
+            
+            // Cerramos el modal después de guardar
             setIsEditModalOpen(false);
+            setSelectedOrder(null);
         } catch (error) {
             console.error('Error updating order status:', error);
         }
@@ -73,7 +120,11 @@ function VerPedidos() {
                 {orders.map((order) => (
                     <div key={order.id} className="orderRow">
                         <div className="orderColumn imageColumn">
-                            <img src={`/images/${order.products[0].image}`} alt={`Producto ${order.id}`} className="orderImage" />
+                            <img 
+                                src={getProductImageUrl(order.products[0].name)} // Buscar imagen por nombre del producto
+                                alt={`Producto ${order.products[0].name}`} 
+                                className="orderImagePedidos" 
+                            />
                         </div>
                         <div className="orderColumn nameColumn">
                             <span className="clientName">{order.name}</span>
@@ -117,7 +168,7 @@ function VerPedidos() {
                                 <option value="inicio">Seleccione el estado</option>
                                 <option value="Entregado">Entregado</option>
                                 <option value="Proceso">En proceso</option>
-                                <option value="Cancelado">Cancelado</option>
+                                <option value=" ">Cancelado</option>
                             </select>
                         </label>
                         <div>

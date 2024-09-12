@@ -35,10 +35,9 @@
 }
 
 .carritoImage {
-  width: 190px; /* Define un ancho fijo para las imágenes */
-  height: 130px; /* Define una altura fija para las imágenes */
+  width: 200px; /* Define un ancho fijo para las imágenes */
+  height: 150px; /* Define una altura fija para las imágenes */
   object-fit: cover;
-  margin-right: 15px;
 }
 
 .carritoDetails {

@@ -17,14 +17,12 @@ function Login() {
     }
   };
 
-  const handleLogin = () => {
-    // Aquí deberías validar el usuario con el backend
-    localStorage.setItem('username', username); // Almacena el nombre del usuario en localStorage
-    navigate('/IndexVendedor'); // Redirige al dashboard o página principal
-};
-
-  const handleIndexVendedor = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    if (!username || !password) {
+      setError('Por favor, complete todos los campos');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:3005/Vendedor');
       if (!response.ok) {
@@ -33,6 +31,7 @@ function Login() {
       const vendedores = await response.json();
       const user = vendedores.find(v => v.Usuario === username && v.Contraseña === password);
       if (user) {
+        localStorage.setItem('username', username);
         navigate('/IndexVendedor', { state: { username } });
       } else {
         setError('Usuario o contraseña incorrectos');
@@ -46,7 +45,7 @@ function Login() {
   return (
     <div className="login-container">
       <h1 className="login-title">Inicio de Sesión</h1>
-      <form className="login-form" onSubmit={handleIndexVendedor}>
+      <form className="login-form" onSubmit={handleLogin}>
         <input
           type="text"
           name="Usuario"
@@ -66,7 +65,7 @@ function Login() {
           onChange={handleInputChange}
         />
         {error && <p className="error-message">{error}</p>}
-        <button  onClick={handleLogin} type="submit" className="login-submit">
+        <button type="submit" className="login-submit">
           Entrar
         </button>
       </form>

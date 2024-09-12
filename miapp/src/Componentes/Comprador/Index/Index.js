@@ -1,19 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import "./Index.css";
 import { useSearch } from "./SearchContext";
 import axios from "axios";
 
 function ProductCard({ product, onAddToCart }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [cardHeight, setCardHeight] = useState('auto');
+  const cardRef = useRef(null);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
+  useEffect(() => {
+    if (cardRef.current) {
+      setCardHeight(cardRef.current.scrollHeight + 'px');
+    }
+  }, [isExpanded]);
+
   return (
-    <div className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}>
+    <div 
+      ref={cardRef}
+      className={`itemCardUnique ${isExpanded ? "expanded" : ""}`}
+      style={{ height: isExpanded ? cardHeight : 'auto' }}
+    >
       <img
-        src={`http://localhost:3005/images/${product.image}`}
+        src={product.image}
         alt={`Producto ${product.id}`}
         className="itemImageUnique"
       />
@@ -21,7 +33,7 @@ function ProductCard({ product, onAddToCart }) {
         <h3 className="itemTitleUnique">{product.name}</h3>
         <p className="itemDescriptionUnique">{product.description}</p>
         <p><strong>Hecho por:</strong> {product.madeBy}</p>
-        <p style={{ marginBottom: '30px' }}>
+        <p style={{ marginBottom: '20px' }}>
           <strong className="Cantidad">Cantidad: </strong>
           {product.quantity > 0 ? product.quantity : <span className="outOfStock">Agotado</span>}
         </p>
@@ -29,7 +41,7 @@ function ProductCard({ product, onAddToCart }) {
           <div className="expandedInfoUnique">
             <p><strong>Región:</strong> {product.region}</p>
             <div className="itemActionsUnique">
-              <span className="itemPriceUnique">Precio: {product.price}</span>
+              <span className="itemPriceUnique"> <strong>Precio:</strong> {product.price}</span>
               <button
                 onClick={() => onAddToCart(product)}
                 className="purchaseButtonUnique"
@@ -56,6 +68,7 @@ function IndexComprador() {
   const [priceFilter, setPriceFilter] = useState("");
   const [vendorFilter, setVendorFilter] = useState("");
   const [vendors, setVendors] = useState([]);
+  const [showClearButton, setShowClearButton] = useState(false); // Estado para mostrar el botón
 
   // Cargar productos desde la API
   useEffect(() => {
@@ -99,7 +112,7 @@ function IndexComprador() {
     return products.filter(product => {
       const matchesType = typeFilter === "" || product.type.toLowerCase() === typeFilter.toLowerCase();
       const matchesRegion = regionFilter === "" || product.region.toLowerCase() === regionFilter.toLowerCase();
-      
+
       const price = parseInt(product.price);
       const matchesPrice = priceFilter === "" ||
         (priceFilter === "Menos de $2000" && price < 2000) ||
@@ -120,6 +133,26 @@ function IndexComprador() {
   const handleAddToCart = (product) => {
     addToCart(product);
   };
+
+  const handleClearFilters = () => {
+    setTypeFilter("");
+    setRegionFilter("");
+    setPriceFilter("");
+    setVendorFilter("");
+    setShowClearButton(false); // Ocultar el botón después de limpiar
+  };
+
+  // Función para verificar si algún filtro tiene valor
+  const handleFilterChange = useCallback(() => {
+    setShowClearButton(
+      typeFilter !== "" || regionFilter !== "" || priceFilter !== "" || vendorFilter !== ""
+    );
+  }, [typeFilter, regionFilter, priceFilter, vendorFilter]);
+
+  // Trigger handleFilterChange whenever a filter value changes
+  useEffect(() => {
+    handleFilterChange();
+  }, [handleFilterChange]); // Añadido handleFilterChange como dependencia
 
   return (
     <div className="mainWrapperUnique">
@@ -176,6 +209,15 @@ function IndexComprador() {
               ))}
             </select>
           </div>
+          {showClearButton && (
+            <button
+              type="button"
+              onClick={handleClearFilters}
+              className="clear-filters-button"
+            >
+              Limpiar Filtros
+            </button>
+          )}
         </div>
       </header>
 

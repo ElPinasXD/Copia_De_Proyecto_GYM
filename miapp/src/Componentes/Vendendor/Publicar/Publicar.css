@@ -52,6 +52,49 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.image-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre el campo de texto y el botón */
+}
+
+.image-input {
+    flex: 1; /* Permite que el campo de texto ocupe el espacio disponible */
+}
+
+.search-button-publicar {
+    padding: 6px 16px;
+    border-radius: 0.375rem;
+    border: 2px solid #ce3131;
+    background-color: transparent;
+    color: #ce3131;
+    cursor: pointer;
+    font-size: 16px;
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        border-color 0.2s;
+}
+
+.search-button-publicar:hover {
+    background-color: #ce3131;
+    color: #ffffff;
+}
+
+.image-preview {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.preview-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+/*
 .upload-container {
     display: flex;
     flex-direction: column;
@@ -81,7 +124,7 @@
     font-size: 14px;
     color: #969292;
 }
-
+*/
 
 .submit-button {
     margin-top: 12px;

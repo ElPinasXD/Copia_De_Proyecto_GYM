@@ -1,5 +1,7 @@
 .historialContainer {
     padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .orderItem {
@@ -16,6 +18,7 @@
 
 .orderDate h3 {
     margin: 0;
+    font-size: 1rem;
 }
 
 .orderDate hr {
@@ -27,36 +30,42 @@
 .orderContent {
     display: flex;
     padding: 10px;
-    align-items: center; /* Alinea verticalmente los elementos en el centro */
-    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .orderImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    flex: 1;
+    width: 120px;
+    height: auto;
+    flex: 0 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 30px;
 }
 
 .orderImage img {
-    max-width: 100%; /* Asegura que la imagen no exceda el contenedor */
+    max-width: 100%;
     max-height: 100%;
+    object-fit: contain;
 }
 
 .orderInfo {
-    flex: 2;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center; /* Centra el texto horizontalmente */
+    text-align: left;
+    min-width: 0;
 }
 
 .clientName {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .viewMoreButtonHistorial {
@@ -67,13 +76,34 @@
     padding: 8px 16px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    font-size: 1em;
-    width: 100%;
-    max-width: 150px;
-    margin: 0 110px;
+    font-size: 0.9em;
+    width: auto;
+    white-space: nowrap;
+    margin-right: 50px;
 }
 
 .viewMoreButtonHistorial:hover {
     background-color: #3182ce;
     color: #ffffff;
+}
+
+@media (max-width: 480px) {
+    .orderContent {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .orderImage {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .orderInfo {
+        width: 100%;
+    }
+
+    .viewMoreButtonHistorial {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
